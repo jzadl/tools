@@ -146,7 +146,10 @@ function countryFlag(code) {
 }
 
 function getLang(code) {
-  const map = { US:'English', GB:'English', MX:'Spanish', ES:'Spanish', FR:'French', DE:'German', JP:'Japanese', CN:'Chinese', BR:'Portuguese', PT:'Portuguese', IN:'Hindi/English', RU:'Russian', [...] };
+  const map = { 
+    US:'English', GB:'English', MX:'Spanish', ES:'Spanish', FR:'French', DE:'German', 
+    JP:'Japanese', CN:'Chinese', BR:'Portuguese', PT:'Portuguese', IN:'Hindi/English', RU:'Russian'
+  };
   return map[code] || '—';
 }
 
