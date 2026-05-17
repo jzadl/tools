@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<!--ip-lookup — tools.jzadl.xyz, built by jzadl-->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IP Lookup — jzadl tools</title>
+<meta name="description" content="Look up any IP address. Get geolocation, ISP, ASN, timezone, and an interactive map. Free, no key needed.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main>
+  <a href="https://tools.jzadl.xyz" class="back-link">← tools.jzadl.xyz</a>
+
+  <div class="hero">
+    <h1>IP<span>.</span>Lookup</h1>
+    <p class="hero-bio">Look up any IP address or domain. Get location, ISP, ASN, timezone, and an interactive map with Google Maps directions.</p>
+  </div>
+
+  <!-- Search -->
+  <div class="search-row">
+    <input type="text" class="search-input" id="searchInput" placeholder="8.8.8.8 or example.com" onkeydown="if(event.key==='Enter')lookup()">
+    <button class="btn-main" id="lookupBtn" onclick="lookup()">Look up →</button>
+    <button class="btn-my-ip" onclick="lookupMyIp()">My IP</button>
+  </div>
+
+  <!-- Recent -->
+  <div id="recentWrap" style="display:none">
+    <div class="section-label">Recent</div>
+    <div class="recent-row" id="recentRow"></div>
+  </div>
+
+  <div class="loading" id="loading"><div class="spinner"></div> <span id="loadingText">Looking up...</span></div>
+  <div class="error-box" id="errorBox"></div>
+
+  <!-- Results -->
+  <div class="results" id="results">
+
+    <!-- IP Header -->
+    <div class="ip-header" id="ipHeader"></div>
+
+    <!-- Info grid -->
+    <div class="info-grid">
+      <div class="info-card">
+        <div class="info-card-title">📍 Location</div>
+        <div class="info-rows" id="locationRows"></div>
+      </div>
+      <div class="info-card">
+        <div class="info-card-title">🌐 Network</div>
+        <div class="info-rows" id="networkRows"></div>
+      </div>
+    </div>
+    <div class="info-grid">
+      <div class="info-card">
+        <div class="info-card-title">🕐 Time</div>
+        <div class="info-rows" id="timeRows"></div>
+      </div>
+      <div class="info-card">
+        <div class="info-card-title">💱 Local Info</div>
+        <div class="info-rows" id="localRows"></div>
+      </div>
+    </div>
+
+    <!-- Map -->
+    <div class="map-card" id="mapCard">
+      <div class="map-card-header">
+        <span class="map-card-title">📌 Location on map</span>
+        <span class="map-coords" id="mapCoords"></span>
+      </div>
+      <iframe class="map-frame" id="mapFrame" loading="lazy" allowfullscreen referrerpolicy="no-referrer-when-downgrade"></iframe>
+      <div class="map-actions">
+        <a class="btn-map" id="openOSM" href="#" target="_blank" rel="noopener noreferrer">OpenStreetMap ↗</a>
+        <a class="btn-map" id="openGMaps" href="#" target="_blank" rel="noopener noreferrer">Google Maps ↗</a>
+        <a class="btn-map" id="openGDirections" href="#" target="_blank" rel="noopener noreferrer">Get Directions ↗</a>
+      </div>
+    </div>
+
+  </div>
+</main>
+<footer>
+  <a href="https://tools.jzadl.xyz">tools.jzadl.xyz</a>
+  <span>·</span>
+  <a href="https://jzadl.xyz">jzadl.xyz</a>
+  <span>·</span>
+  <a href="mailto:contact@jzadl.xyz">contact@jzadl.xyz</a>
+  <span>·</span>
+  <span>© 2026-present</span>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>

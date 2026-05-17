@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<!--gradient-maker — tools.jzadl.xyz, built by jzadl-->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gradient Maker — jzadl tools</title>
+<meta name="description" content="Build linear and radial gradients visually. Add stops, drag them, move the radial center. Copy CSS instantly.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main>
+  <a href="https://tools.jzadl.xyz" class="back-link">← tools.jzadl.xyz</a>
+
+  <div class="hero">
+    <h1>Gradient<span>.</span>Maker</h1>
+    <p class="hero-bio">Build linear and radial gradients visually. Add and drag color stops, move the radial center point, copy CSS instantly.</p>
+  </div>
+
+  <div class="workspace">
+
+    <!-- Left: controls -->
+    <div class="controls">
+
+      <!-- Type & angle -->
+      <div class="card">
+        <div class="card-title">Type</div>
+        <div class="type-row">
+          <button class="type-btn active" onclick="setType('linear', this)">Linear</button>
+          <button class="type-btn" onclick="setType('radial', this)">Radial</button>
+          <button class="type-btn" onclick="setType('conic', this)">Conic</button>
+        </div>
+
+        <!-- Linear angle -->
+        <div id="linearOpts" class="field">
+          <label>Angle</label>
+          <div class="slider-row">
+            <input type="range" id="angleSlider" min="0" max="360" value="135" oninput="onAngle()">
+            <span class="slider-val" id="angleVal">135°</span>
+          </div>
+        </div>
+
+        <!-- Radial options -->
+        <div id="radialOpts" class="radial-opts">
+          <div class="field">
+            <label>Shape</label>
+            <div class="shape-row">
+              <button class="shape-btn active" id="shapeCircle" onclick="setShape('circle', this)">Circle</button>
+              <button class="shape-btn" id="shapeEllipse" onclick="setShape('ellipse', this)">Ellipse</button>
+            </div>
+          </div>
+          <div class="hint">💡 Drag the <strong style="color:#3b82f6">blue dot</strong> on the preview to move the radial center point</div>
+        </div>
+
+        <!-- Conic angle -->
+        <div id="conicOpts" style="display:none" class="field">
+          <label>Start Angle</label>
+          <div class="slider-row">
+            <input type="range" id="conicSlider" min="0" max="360" value="0" oninput="onConicAngle()">
+            <span class="slider-val" id="conicVal">0°</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Color stops -->
+      <div class="stops-card">
+        <div class="card-title">Color Stops</div>
+
+        <!-- Visual stop bar -->
+        <div class="stop-bar-wrap" id="stopBarWrap">
+          <div class="stop-bar-bg" id="stopBarBg"></div>
+        </div>
+
+        <!-- Stop list -->
+        <div class="stop-list" id="stopList"></div>
+        <button class="add-stop-btn" onclick="addStop()">+ Add stop</button>
+      </div>
+
+      <!-- Presets -->
+      <div class="card">
+        <div class="card-title">Presets</div>
+        <div class="presets-row" id="presetsRow"></div>
+      </div>
+
+    </div>
+
+    <!-- Right: preview -->
+    <div class="preview-card">
+      <div class="preview-area" id="previewArea">
+        <div class="preview-gradient" id="previewGradient"></div>
+        <div class="radial-handle" id="radialHandle"></div>
+      </div>
+      <div class="css-output">
+        <div class="css-label">CSS Output</div>
+        <div class="css-code" id="cssCode"></div>
+        <div class="btn-row-sm">
+          <button class="btn-copy" id="copyBtn" onclick="copyCSS()">Copy CSS</button>
+          <button class="btn-sm" onclick="copyBg()">Copy background</button>
+          <button class="btn-sm" onclick="randomGradient()">Random</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<footer>
+  <a href="https://tools.jzadl.xyz">tools.jzadl.xyz</a>
+  <span>·</span>
+  <a href="https://jzadl.xyz">jzadl.xyz</a>
+  <span>·</span>
+  <a href="mailto:contact@jzadl.xyz">contact@jzadl.xyz</a>
+  <span>·</span>
+  <span>© 2026-present</span>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
