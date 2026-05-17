@@ -142,11 +142,11 @@ function normalize(d) {
 }
 function countryFlag(code) {
   if (!code || code.length !== 2) return '🌐';
-  return String.fromCodePoint(...[...code.toUpperCase()].map(c => 0x1F1E0 - 65 + c.charCodeAt(0)));
+  return String.fromCodePoint(...[...code.toUpperCase()].map(c => 0x1F1E6 - 65 + c.charCodeAt(0)));
 }
 
 function getLang(code) {
-  const map = { US:'English', GB:'English', MX:'Spanish', ES:'Spanish', FR:'French', DE:'German', JP:'Japanese', CN:'Chinese', BR:'Portuguese', PT:'Portuguese', IN:'Hindi/English', RU:'Russian', KR:'Korean', IT:'Italian', NL:'Dutch', PL:'Polish', SE:'Swedish', NO:'Norwegian', DK:'Danish', FI:'Finnish', AR:'Spanish', CO:'Spanish', CL:'Spanish' };
+  const map = { US:'English', GB:'English', MX:'Spanish', ES:'Spanish', FR:'French', DE:'German', JP:'Japanese', CN:'Chinese', BR:'Portuguese', PT:'Portuguese', IN:'Hindi/English', RU:'Russian', [...] };
   return map[code] || '—';
 }
 
