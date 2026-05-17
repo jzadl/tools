@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Remove image backgrounds instantly in your browser. No uploads, no accounts, completely free.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<title>BG Remover — jzadl tools</title>
+<link rel="icon" type="image/x-icon" href="../favicon.ico">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main>
+
+  <a href="https://tools.jzadl.xyz" class="back-link">&#8592; tools.jzadl.xyz</a>
+
+  <div class="hero">
+    <h1>BG<span class="dot">.</span>Remover</h1>
+    <p>Remove backgrounds instantly in your browser. Nothing leaves your machine.</p>
+  </div>
+
+  <input type="file" id="fileInput" accept="image/png,image/jpeg,image/webp" style="display:none">
+  <div class="drop-zone" id="dropZone">
+    <div class="drop-icon" style="pointer-events:none">🖼️</div>
+    <div class="drop-title" id="dropTitle" style="pointer-events:none">Drop your image here</div>
+    <div class="drop-sub" id="dropSub" style="pointer-events:none">or click to browse &mdash; PNG, JPG, WebP supported</div>
+  </div>
+
+  <div class="processing-bar" id="processingBar">
+    <div class="spinner"></div>
+    <div class="processing-text">
+      <strong id="processingStatus">Loading model...</strong>
+      <span id="processingDetail">First run downloads the AI model (~50 MB), cached after that.</span>
+    </div>
+    <div class="progress-wrap">
+      <div class="progress-fill" id="progressFill"></div>
+    </div>
+  </div>
+
+  <div class="result-section" id="resultSection">
+    <div class="result-grid">
+      <div class="result-panel">
+        <div class="result-panel-label">Original</div>
+        <img class="result-panel-img" id="originalImg" src="" alt="Original">
+      </div>
+      <div class="result-panel">
+        <div class="result-panel-label">Result</div>
+        <div class="checker-bg" id="resultImgWrap" style="padding:16px">
+          <img class="result-panel-img" id="resultImg" src="" alt="Result" style="padding:0">
+        </div>
+        <div class="bg-options">
+          <span class="bg-label">Background</span>
+          <div class="bg-btn transparent-btn active" id="bgTransparent" title="Transparent"></div>
+          <div class="bg-btn" style="background:#ffffff" data-color="#ffffff" title="White"></div>
+          <div class="bg-btn" style="background:#000000" data-color="#000000" title="Black"></div>
+          <div class="bg-btn" style="background:#3b82f6" data-color="#3b82f6" title="Blue"></div>
+          <div class="bg-btn" style="background:#22c55e" data-color="#22c55e" title="Green"></div>
+          <div class="bg-btn" style="background:#ef4444" data-color="#ef4444" title="Red"></div>
+          <input type="color" class="bg-color-input" id="bgCustom" value="#ffffff" title="Custom color">
+        </div>
+      </div>
+    </div>
+
+    <div class="actions">
+      <button class="btn btn-primary" id="downloadBtn">&#8595; Download PNG</button>
+      <button class="btn btn-secondary" id="newImageBtn">New image</button>
+    </div>
+  </div>
+
+  <div class="note">
+    <strong>How it works:</strong> Uses <a href="https://huggingface.co/briaai/RMBG-1.4" target="_blank" rel="noopener">RMBG-1.4 by BRIA AI</a> via <a href="https://github.com/huggingface/transformers.js" target="_blank" rel="noopener">Transformers.js</a>. The model runs entirely in your browser via ONNX/WebAssembly. No server, no uploads, no account needed.
+  </div>
+
+</main>
+
+<footer>
+  <a href="https://tools.jzadl.xyz">tools.jzadl.xyz</a> ·
+  <a href="https://jzadl.xyz">jzadl.xyz</a> ·
+  <a href="mailto:contact@jzadl.xyz">E-Mail</a> ·
+  &copy; 2026-present
+</footer>
+
+<script type="module" src="script.js"></script>
+</body>
+</html>
