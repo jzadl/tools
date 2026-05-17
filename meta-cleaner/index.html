@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Remove or replace image metadata (EXIF, GPS, dates) instantly in your browser. Nothing leaves your machine.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<title>Meta.Cleaner — jzadl tools</title>
+<link rel="icon" type="image/x-icon" href="../favicon.ico">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main>
+
+  <a href="https://tools.jzadl.xyz" class="back-link">&#8592; tools.jzadl.xyz</a>
+
+  <div class="hero">
+    <h1>Meta<span class="dot">.</span>Cleaner</h1>
+    <p>Remove or replace image metadata (EXIF, GPS, timestamps) in your browser. Nothing leaves your machine.</p>
+  </div>
+
+  <input type="file" id="fileInput" accept="image/jpeg,image/png,image/webp,image/tiff" style="display:none">
+  <div class="drop-zone" id="dropZone">
+    <div class="drop-icon">🔍</div>
+    <div class="drop-title" id="dropTitle">Drop your image here</div>
+    <div class="drop-sub" id="dropSub">or click to browse &mdash; JPEG, PNG, WebP, TIFF supported</div>
+  </div>
+
+  <div class="meta-section" id="metaSection">
+
+    <div class="panel">
+      <div class="panel-header">
+        Detected metadata
+        <span id="tagCount"></span>
+      </div>
+      <table class="meta-table" id="metaTable"></table>
+      <div class="no-meta" id="noMeta" style="display:none">No metadata found in this image.</div>
+    </div>
+
+    <div class="mode-selector">
+      <button class="mode-btn active" id="modeStrip" onclick="setMode('strip')">&#10005; Strip all metadata</button>
+      <button class="mode-btn" id="modeReplace" onclick="setMode('replace')">&#9998; Replace with custom data</button>
+    </div>
+
+    <div class="custom-fields panel" id="customFields">
+      <div class="panel-header">Custom metadata <span>Leave blank to skip a field</span></div>
+      <div style="padding:16px">
+        <div class="fields-grid">
+          <div class="field-group">
+            <label class="field-label">Camera Make</label>
+            <input class="field-input" id="fMake" placeholder="e.g. Apple">
+          </div>
+          <div class="field-group">
+            <label class="field-label">Camera Model</label>
+            <input class="field-input" id="fModel" placeholder="e.g. iPhone 15 Pro">
+          </div>
+          <div class="field-group">
+            <label class="field-label">Author / Artist</label>
+            <input class="field-input" id="fArtist" placeholder="e.g. John Doe">
+          </div>
+          <div class="field-group">
+            <label class="field-label">Copyright</label>
+            <input class="field-input" id="fCopyright" placeholder="e.g. &copy; 2026 John Doe">
+          </div>
+          <div class="field-group">
+            <label class="field-label">Date Taken</label>
+            <input class="field-input" id="fDate" type="datetime-local">
+          </div>
+          <div class="field-group">
+            <label class="field-label">Software</label>
+            <input class="field-input" id="fSoftware" placeholder="e.g. Lightroom 7.0">
+          </div>
+          <div class="field-group full">
+            <label class="field-label">Description / Comment</label>
+            <input class="field-input" id="fDescription" placeholder="e.g. Shot on a rainy day in Tokyo">
+          </div>
+          <div class="field-group">
+            <label class="field-label">GPS Latitude</label>
+            <input class="field-input" id="fLat" placeholder="e.g. 35.6762">
+          </div>
+          <div class="field-group">
+            <label class="field-label">GPS Longitude</label>
+            <input class="field-input" id="fLon" placeholder="e.g. 139.6503">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="actions">
+      <button class="btn btn-primary" id="processBtn">&#8595; Download cleaned image</button>
+      <button class="btn btn-secondary" id="newFileBtn">New image</button>
+    </div>
+
+  </div>
+
+  <div class="note">
+    <strong>How it works:</strong> Uses <a href="https://github.com/exif-js/exif-js" target="_blank" rel="noopener">exif-js</a> to read metadata and the Canvas API to strip or replace it when re-encoding the image. JPEG files support full EXIF replacement. PNG and WebP are stripped via canvas re-encoding (no EXIF standard). Nothing is uploaded anywhere.
+  </div>
+
+</main>
+
+<footer>
+  <a href="https://tools.jzadl.xyz">tools.jzadl.xyz</a> ·
+  <a href="https://jzadl.xyz">jzadl.xyz</a> ·
+  <a href="mailto:contact@jzadl.xyz">E-Mail</a> ·
+  &copy; 2026-present
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/piexifjs@1.0.6/piexif.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
