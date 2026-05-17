@@ -2,7 +2,7 @@
 html, body { width: 100%; }
 body { font-family: 'Inter', sans-serif; background: #1a1a1a; color: #e0e0e0; min-height: 100vh; display: flex; flex-direction: column; }
 a { color: inherit; text-decoration: none; }
-main { flex: 1; width: 100%; padding: 80px 6vw; max-width: 960px; }
+main { flex: 1; width: 100%; padding: 80px 6vw; max-width: 960px; margin: 0 auto; }
 
 .back-link { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; color: #555; margin-bottom: 32px; transition: color 0.15s; }
 .back-link:hover { color: #aaa; }
@@ -13,7 +13,7 @@ main { flex: 1; width: 100%; padding: 80px 6vw; max-width: 960px; }
 .hero-bio { font-size: 15px; color: #888; line-height: 1.65; max-width: 540px; }
 .privacy-note { display: inline-flex; align-items: center; gap: 6px; margin-top: 10px; font-size: 12px; color: #4ade80; }
 
-.drop-zone { border: 1.5px dashed #2e2e2e; border-radius: 12px; padding: 56px 32px; text-align: center; cursor: pointer; transition: border-color 0.2s, background 0.2s; margin-bottom: 24px; background: #1e1e1e; }
+.drop-zone { border: 1.5px dashed #2e2e2e; border-radius: 12px; padding: 56px 32px; text-align: center; cursor: pointer; transition: border-color 0.2s, background 0.2s; margin-bottom: 24px; background: #1f1f1f; }
 .drop-zone:hover, .drop-zone.dragover { border-color: #3b82f6; background: #1c2333; }
 .drop-icon { font-size: 36px; margin-bottom: 14px; }
 .drop-title { font-size: 15px; font-weight: 600; color: #fff; margin-bottom: 6px; }
@@ -42,12 +42,12 @@ input[type=file] { display: none; }
 .lock-row { display: flex; align-items: center; gap: 8px; font-size: 12px; color: #555; cursor: pointer; user-select: none; }
 .lock-row input[type=checkbox] { accent-color: #3b82f6; }
 
-.btn-main { display: inline-flex; align-items: center; gap: 6px; padding: 9px 20px; background: #3b82f6; color: #fff; font-size: 13px; font-weight: 500; border-radius: 20px; transition: background 0.15s; cursor: pointer; border: none; font-family: inherit; }
+.btn-main { display: inline-flex; align-items: center; gap: 6px; padding: 9px 20px; background: #3b82f6; color: #fff; font-size: 13px; font-weight: 500; border-radius: 20px; transition: background 0.15s; border: none; cursor: pointer; font-family: inherit; }
 .btn-main:hover { background: #2563eb; }
 .btn-main:disabled { background: #2a2a2a; color: #444; cursor: not-allowed; }
 .btn-secondary { padding: 9px 20px; background: #222; border: 1px solid #2e2e2e; border-radius: 20px; font-size: 13px; font-weight: 500; color: #888; cursor: pointer; font-family: inherit; transition: border-color 0.15s, color 0.15s; }
 .btn-secondary:hover { border-color: #444; color: #fff; }
-.btn-dl { padding: 9px 20px; background: #1a2a1a; border: 1px solid #2a4a2a; border-radius: 20px; font-size: 13px; font-weight: 500; color: #4ade80; cursor: pointer; font-family: inherit; transition: border-color 0.15s, background 0.15s; }
+.btn-dl { padding: 9px 20px; background: #1a2a1a; border: 1px solid #2a4a2a; border-radius: 20px; font-size: 13px; font-weight: 500; color: #4ade80; cursor: pointer; font-family: inherit; transition: background 0.15s, border-color 0.15s; }
 .btn-dl:hover { background: #1e3a1e; border-color: #3a6a3a; }
 .btn-row { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
 
@@ -88,7 +88,7 @@ input[type=file] { display: none; }
 .batch-size-orig { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #555; }
 .batch-size-new { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #4ade80; }
 .batch-pct { font-size: 11px; font-weight: 600; color: #4ade80; }
-.btn-dl-sm { padding: 4px 12px; background: transparent; border: 1px solid #2e2e2e; border-radius: 6px; font-size: 11px; color: #555; cursor: pointer; font-family: inherit; transition: border-color 0.15s, color 0.15s; white-space: nowrap; }
+.btn-dl-sm { padding: 4px 12px; background: transparent; border: 1px solid #2e2e2e; border-radius: 6px; font-size: 11px; color: #555; cursor: pointer; font-family: inherit; transition: border-color 0.15s, color 0.15s; }
 .btn-dl-sm:hover { border-color: #3b82f6; color: #fff; }
 
 footer { border-top: 1px solid #2e2e2e; padding: 20px 6vw; font-size: 12px; color: #444; display: flex; gap: 12px; }

@@ -13,13 +13,13 @@ main { flex: 1; width: 100%; padding: 80px 6vw; max-width: 960px; margin: 0 auto
 .hero-bio { font-size: 15px; color: #888; line-height: 1.65; max-width: 540px; }
 
 .search-row { display: flex; gap: 10px; margin-bottom: 32px; align-items: center; }
-.search-input { flex: 1; background: #222; border: 1px solid #2e2e2e; border-radius: 10px; color: #e0e0e0; font-family: 'JetBrains Mono', monospace; font-size: 14px; padding: 11px 16px; outline: none; transition: border-color 0.15s; max-width: 400px; }
+.search-input { flex: 1; background: #222; border: 1px solid #2e2e2e; border-radius: 10px; color: #e0e0e0; font-family: 'JetBrains Mono', monospace; font-size: 14px; padding: 11px 16px; outline: none; transition: border-color 0.15s; }
 .search-input:focus { border-color: #3b82f6; }
 .search-input::placeholder { color: #444; font-family: 'Inter', sans-serif; }
-.btn-main { display: inline-flex; align-items: center; gap: 6px; padding: 11px 20px; background: #3b82f6; color: #fff; font-size: 13px; font-weight: 500; border-radius: 10px; transition: background 0.15s; cursor: pointer; border: none; font-family: inherit; }
+.btn-main { display: inline-flex; align-items: center; gap: 6px; padding: 11px 20px; background: #3b82f6; color: #fff; font-size: 13px; font-weight: 500; border-radius: 10px; transition: background 0.15s; border: none; cursor: pointer; font-family: inherit; }
 .btn-main:hover { background: #2563eb; }
 .btn-main:disabled { background: #2a2a2a; color: #444; cursor: not-allowed; }
-.btn-my-ip { padding: 11px 16px; background: #222; border: 1px solid #2e2e2e; border-radius: 10px; font-size: 13px; font-weight: 500; color: #888; cursor: pointer; font-family: inherit; transition: border-color 0.15s, color 0.15s; white-space: nowrap; }
+.btn-my-ip { padding: 11px 16px; background: #222; border: 1px solid #2e2e2e; border-radius: 10px; font-size: 13px; font-weight: 500; color: #888; cursor: pointer; font-family: inherit; transition: border-color 0.15s, color 0.15s; }
 .btn-my-ip:hover { border-color: #3b82f6; color: #fff; }
 
 .loading { display: none; align-items: center; gap: 10px; font-size: 13px; color: #555; margin-bottom: 24px; }
@@ -60,7 +60,7 @@ main { flex: 1; width: 100%; padding: 80px 6vw; max-width: 960px; margin: 0 auto
 .map-coords { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #555; }
 .map-frame { width: 100%; height: 340px; border: none; display: block; filter: invert(0.9) hue-rotate(180deg) saturate(0.7); }
 .map-actions { padding: 14px 20px; display: flex; gap: 8px; flex-wrap: wrap; border-top: 1px solid #2e2e2e; }
-.btn-map { padding: 7px 16px; background: #1a1a1a; border: 1px solid #2e2e2e; border-radius: 8px; font-size: 12px; color: #888; cursor: pointer; font-family: inherit; transition: border-color 0.15s, color 0.15s; text-decoration: none; display: inline-flex; align-items: center; gap: 5px; }
+.btn-map { padding: 7px 16px; background: #1a1a1a; border: 1px solid #2e2e2e; border-radius: 8px; font-size: 12px; color: #888; cursor: pointer; font-family: inherit; transition: border-color 0.15s, color 0.15s; }
 .btn-map:hover { border-color: #3b82f6; color: #fff; }
 
 .recent-row { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 32px; }
