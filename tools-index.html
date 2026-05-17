@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="tools.jzadl.xyz — a collection of utilities built by jzadl. Hackintosh helpers, converters, and more.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<title>tools.jzadl</title>
+<link rel="icon" type="image/x-icon" href="./favicon.ico">
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { width: 100%; }
+body { font-family: 'Inter', sans-serif; background: #1a1a1a; color: #e0e0e0; min-height: 100vh; display: flex; flex-direction: column; }
+a { color: inherit; text-decoration: none; }
+
+main { flex: 1; width: 100%; padding: 80px 6vw; }
+
+.back-link { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; color: #555; margin-bottom: 40px; transition: color 0.15s; }
+.back-link:hover { color: #aaa; }
+
+.hero { margin-bottom: 64px; }
+.hero h1 { font-size: 56px; font-weight: 700; color: #fff; letter-spacing: -0.03em; line-height: 1.1; margin-bottom: 16px; }
+.hero h1 span { color: #3b82f6; }
+.hero-bio { font-size: 16px; color: #888; line-height: 1.65; max-width: 480px; }
+
+.section-head { display: flex; align-items: baseline; gap: 10px; margin-bottom: 20px; }
+.section-head h2 { font-size: 18px; font-weight: 600; color: #fff; }
+.section-head span { font-size: 12px; color: #555; }
+
+.tools-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+
+.tool-card {
+  background: #222;
+  border: 1px solid #2e2e2e;
+  border-radius: 10px;
+  padding: 22px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  transition: border-color 0.15s, background 0.15s;
+  cursor: pointer;
+}
+.tool-card:hover { border-color: #3b82f6; background: #242424; }
+.tool-card.disabled { opacity: 0.4; pointer-events: none; cursor: default; }
+
+.tool-header { display: flex; align-items: center; justify-content: space-between; }
+.tool-icon { font-size: 20px; }
+.tool-arrow { font-size: 13px; color: #444; transition: color 0.15s; }
+.tool-card:hover .tool-arrow { color: #3b82f6; }
+
+.tool-name { font-size: 15px; font-weight: 600; color: #fff; margin-top: 10px; }
+.tool-desc { font-size: 13px; color: #777; line-height: 1.5; }
+
+.tool-tag { display: inline-flex; align-items: center; gap: 5px; margin-top: 4px; font-size: 11px; padding: 3px 8px; background: #2a2a2a; border: 1px solid #333; border-radius: 6px; color: #666; align-self: flex-start; }
+
+.tool-status { font-size: 10px; padding: 2px 7px; border-radius: 5px; font-weight: 500; }
+.tool-status.soon { background: #1e1e1e; border: 1px solid #333; color: #555; }
+
+/* coming-soon card */
+.tool-card.coming-soon { border-style: dashed; }
+
+footer { border-top: 1px solid #2e2e2e; padding: 20px 6vw; font-size: 12px; color: #444; display: flex; gap: 12px; }
+footer a { color: #555; transition: color 0.15s; }
+footer a:hover { color: #888; }
+
+@media (max-width: 720px) { .tools-grid { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 480px) { .tools-grid { grid-template-columns: 1fr; } .hero h1 { font-size: 38px; } }
+</style>
+</head>
+<body>
+<main>
+
+  <a href="https://jzadl.xyz" class="back-link">← jzadl.xyz</a>
+
+  <div class="hero">
+    <h1>tools<span>.</span></h1>
+    <p class="hero-bio">A collection of small utilities I built for myself — and decided to make public. No accounts, no tracking.</p>
+  </div>
+
+  <section>
+    <div class="section-head">
+      <h2>Available</h2>
+      <span>ready to use</span>
+    </div>
+    <div class="tools-grid">
+
+      <a href="./kext-checker" class="tool-card">
+        <div class="tool-header">
+          <span class="tool-icon">🍎</span>
+          <span class="tool-arrow">↗</span>
+        </div>
+        <div class="tool-name">Kext Checker</div>
+        <p class="tool-desc">Upload your dxdiag.txt and get automatic kext recommendations + best macOS version for your hardware.</p>
+        <span class="tool-tag">Hackintosh · OpenCore</span>
+      </a>
+
+      <div class="tool-card coming-soon disabled">
+        <div class="tool-header">
+          <span class="tool-icon">🔗</span>
+          <span class="tool-status soon">soon</span>
+        </div>
+        <div class="tool-name">URL Shortener</div>
+        <p class="tool-desc">Shorten any link. Clean, minimal, no ads.</p>
+        <span class="tool-tag">Web</span>
+      </div>
+
+      <div class="tool-card coming-soon disabled">
+        <div class="tool-header">
+          <span class="tool-icon">🔄</span>
+          <span class="tool-status soon">soon</span>
+        </div>
+        <div class="tool-name">Converter</div>
+        <p class="tool-desc">Units, formats, and more — all in one place.</p>
+        <span class="tool-tag">Utility</span>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <a href="https://jzadl.xyz">jzadl.xyz</a> ·
+  <a href="mailto:contact@jzadl.xyz">E-Mail</a> ·
+  © 2026-present
+</footer>
+</body>
+</html>
