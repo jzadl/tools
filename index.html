@@ -42,7 +42,6 @@ main { flex: 1; width: 100%; padding: 80px 6vw; }
   cursor: pointer;
 }
 .tool-card:hover { border-color: #3b82f6; background: #242424; }
-.tool-card.disabled { opacity: 0.4; pointer-events: none; cursor: default; }
 
 .tool-header { display: flex; align-items: center; justify-content: space-between; }
 .tool-icon { font-size: 20px; }
@@ -53,12 +52,6 @@ main { flex: 1; width: 100%; padding: 80px 6vw; }
 .tool-desc { font-size: 13px; color: #777; line-height: 1.5; }
 
 .tool-tag { display: inline-flex; align-items: center; gap: 5px; margin-top: 4px; font-size: 11px; padding: 3px 8px; background: #2a2a2a; border: 1px solid #333; border-radius: 6px; color: #666; align-self: flex-start; }
-
-.tool-status { font-size: 10px; padding: 2px 7px; border-radius: 5px; font-weight: 500; }
-.tool-status.soon { background: #1e1e1e; border: 1px solid #333; color: #555; }
-
-/* coming-soon card */
-.tool-card.coming-soon { border-style: dashed; }
 
 footer { border-top: 1px solid #2e2e2e; padding: 20px 6vw; font-size: 12px; color: #444; display: flex; gap: 12px; }
 footer a { color: #555; transition: color 0.15s; }
@@ -71,7 +64,7 @@ footer a:hover { color: #888; }
 <body>
 <main>
 
-  <a href="https://jzadl.xyz" class="back-link">← jzadl.xyz</a>
+  <a href="https://jzadl.xyz" class="back-link">&#8592; jzadl.xyz</a>
 
   <div class="hero">
     <h1>tools<span>.</span></h1>
@@ -88,32 +81,42 @@ footer a:hover { color: #888; }
       <a href="./kext.checker" class="tool-card">
         <div class="tool-header">
           <span class="tool-icon">🍎</span>
-          <span class="tool-arrow">↗</span>
+          <span class="tool-arrow">&#8599;</span>
         </div>
         <div class="tool-name">Kext Checker</div>
         <p class="tool-desc">Upload your dxdiag.txt and get automatic kext recommendations + best macOS version for your hardware.</p>
         <span class="tool-tag">Hackintosh · OpenCore</span>
       </a>
 
-      <div class="tool-card coming-soon disabled">
+      <a href="./color-picker" class="tool-card">
         <div class="tool-header">
-          <span class="tool-icon">⏩</span>
-          <span class="tool-status soon">soon</span>
+          <span class="tool-icon">🎨</span>
+          <span class="tool-arrow">&#8599;</span>
         </div>
-        <div class="tool-name">...</div>
-        <p class="tool-desc">...</p>
-        <span class="tool-tag">...</span>
-      </div>
+        <div class="tool-name">Color Picker</div>
+        <p class="tool-desc">Real-time color picker with HEX/RGB/HSL/HSV/CMYK conversion, shades palette, history, and Tailwind matching. Click any format to copy.</p>
+        <span class="tool-tag">Design · CSS</span>
+      </a>
 
-      <div class="tool-card coming-soon disabled">
+      <a href="./image-compressor" class="tool-card">
         <div class="tool-header">
-          <span class="tool-icon">🔄</span>
-          <span class="tool-status soon">soon</span>
+          <span class="tool-icon">🖼️</span>
+          <span class="tool-arrow">&#8599;</span>
         </div>
-        <div class="tool-name">Converter</div>
-        <p class="tool-desc">Units, formats, and more — all in one place.</p>
-        <span class="tool-tag">Utility</span>
-      </div>
+        <div class="tool-name">Image Compressor</div>
+        <p class="tool-desc">Compress and resize JPEG/PNG/WebP right in your browser. Batch up to 20 files, lock aspect ratio, nothing leaves your machine.</p>
+        <span class="tool-tag">Images · Privacy</span>
+      </a>
+
+      <a href="./qr-generator" class="tool-card">
+        <div class="tool-header">
+          <span class="tool-icon">📱</span>
+          <span class="tool-arrow">&#8599;</span>
+        </div>
+        <div class="tool-name">QR Generator</div>
+        <p class="tool-desc">Generate QR codes for URLs, text, Wi-Fi networks, and vCard contacts. Download as PNG or SVG.</p>
+        <span class="tool-tag">Utility · Offline</span>
+      </a>
 
     </div>
   </section>
@@ -123,7 +126,7 @@ footer a:hover { color: #888; }
 <footer>
   <a href="https://jzadl.xyz">jzadl.xyz</a> ·
   <a href="mailto:contact@jzadl.xyz">E-Mail</a> ·
-  © 2026-present
+  &copy; 2026-present
 </footer>
 </body>
 </html>
