@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<!--qr-generator — tools.jzadl.xyz, built by jzadl-->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>QR Generator — jzadl tools</title>
+<meta name="description" content="Generate QR codes for URLs, text, Wi-Fi, and contacts. Free, instant, no tracking.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main>
+  <a href="https://tools.jzadl.xyz" class="back-link">← tools.jzadl.xyz</a>
+
+  <div class="hero">
+    <h1>QR<span>.</span>Generator</h1>
+    <p class="hero-bio">Generate QR codes for URLs, plain text, Wi-Fi networks, and contacts. Instant, free, nothing leaves your browser.</p>
+  </div>
+
+  <div class="tabs-row">
+    <button class="tab-btn active" onclick="switchTab('url', this)">URL</button>
+    <button class="tab-btn" onclick="switchTab('text', this)">Text</button>
+    <button class="tab-btn" onclick="switchTab('wifi', this)">Wi-Fi</button>
+    <button class="tab-btn" onclick="switchTab('contact', this)">Contact</button>
+  </div>
+
+  <div class="tab-panel active" id="tab-url">
+    <div class="field">
+      <label>URL</label>
+      <input type="url" id="url-input" placeholder="https://jzadl.xyz" oninput="autoGenerate()">
+    </div>
+    <div class="field">
+      <label>Size</label>
+      <div class="slider-row">
+        <input type="range" id="url-size" min="128" max="512" step="32" value="256" oninput="updateSlider('url-size','url-size-val');autoGenerate()">
+        <span class="slider-val" id="url-size-val">256px</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="tab-panel" id="tab-text">
+    <div class="field">
+      <label>Text</label>
+      <textarea id="text-input" placeholder="Any text, up to ~2900 characters..." oninput="autoGenerate()"></textarea>
+    </div>
+    <div class="field">
+      <label>Size</label>
+      <div class="slider-row">
+        <input type="range" id="text-size" min="128" max="512" step="32" value="256" oninput="updateSlider('text-size','text-size-val');autoGenerate()">
+        <span class="slider-val" id="text-size-val">256px</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="tab-panel" id="tab-wifi">
+    <div class="row-2">
+      <div class="field">
+        <label>Network Name (SSID)</label>
+        <input type="text" id="wifi-ssid" placeholder="MyNetwork" oninput="autoGenerate()">
+      </div>
+      <div class="field">
+        <label>Security</label>
+        <select id="wifi-sec" onchange="autoGenerate()">
+          <option value="WPA">WPA/WPA2</option>
+          <option value="WEP">WEP</option>
+          <option value="">None (open)</option>
+        </select>
+      </div>
+    </div>
+    <div class="field">
+      <label>Password</label>
+      <input type="text" id="wifi-pass" placeholder="Leave empty if open network" oninput="autoGenerate()">
+    </div>
+    <div class="field">
+      <label>Size</label>
+      <div class="slider-row">
+        <input type="range" id="wifi-size" min="128" max="512" step="32" value="256" oninput="updateSlider('wifi-size','wifi-size-val');autoGenerate()">
+        <span class="slider-val" id="wifi-size-val">256px</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="tab-panel" id="tab-contact">
+    <div class="row-2">
+      <div class="field">
+        <label>First Name</label>
+        <input type="text" id="vcard-first" placeholder="Jesus" oninput="autoGenerate()">
+      </div>
+      <div class="field">
+        <label>Last Name</label>
+        <input type="text" id="vcard-last" placeholder="Last" oninput="autoGenerate()">
+      </div>
+    </div>
+    <div class="row-2">
+      <div class="field">
+        <label>Phone</label>
+        <input type="tel" id="vcard-phone" placeholder="+1 234 567 8900" oninput="autoGenerate()">
+      </div>
+      <div class="field">
+        <label>Email</label>
+        <input type="email" id="vcard-email" placeholder="me@jzadl.xyz" oninput="autoGenerate()">
+      </div>
+    </div>
+    <div class="field">
+      <label>Website</label>
+      <input type="url" id="vcard-url" placeholder="https://jzadl.xyz" oninput="autoGenerate()">
+    </div>
+    <div class="field">
+      <label>Size</label>
+      <div class="slider-row">
+        <input type="range" id="contact-size" min="128" max="512" step="32" value="256" oninput="updateSlider('contact-size','contact-size-val');autoGenerate()">
+        <span class="slider-val" id="contact-size-val">256px</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="qr-output" id="qrOutput">
+    <div class="qr-box" id="qrBox"></div>
+    <div class="qr-meta">
+      <div>
+        <div class="qr-meta-label">Encoded content</div>
+        <div class="qr-meta-value" id="qrContent"></div>
+      </div>
+      <div class="dl-row">
+        <button class="btn-dl" onclick="downloadQR('png')">Download PNG</button>
+        <button class="btn-dl" onclick="downloadQR('svg')">Download SVG</button>
+      </div>
+    </div>
+  </div>
+
+</main>
+<footer>
+  <a href="https://tools.jzadl.xyz">tools.jzadl.xyz</a>
+  <span>·</span>
+  <a href="https://jzadl.xyz">jzadl.xyz</a>
+  <span>·</span>
+  <a href="mailto:contact@jzadl.xyz">contact@jzadl.xyz</a>
+  <span>·</span>
+  <span>© 2026-present</span>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>

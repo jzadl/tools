@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<!--image-compressor — tools.jzadl.xyz, built by jzadl-->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Image Compressor — jzadl tools</title>
+<meta name="description" content="Compress images instantly in your browser. No uploads, no server, nothing leaves your device.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main>
+  <a href="https://tools.jzadl.xyz" class="back-link">← tools.jzadl.xyz</a>
+
+  <div class="hero">
+    <h1>Image<span>.</span>Compressor</h1>
+    <p class="hero-bio">Compress and resize images instantly. Supports JPEG, PNG, and WebP. Batch compress up to 20 files at once.</p>
+    <div class="privacy-note">🔒 Nothing leaves your browser — 100% local processing</div>
+  </div>
+
+  <input type="file" id="fileInput" accept="image/jpeg,image/png,image/webp" multiple>
+  <div class="drop-zone" id="dropZone">
+    <div class="drop-icon">🖼️</div>
+    <div class="drop-title">Drop images here</div>
+    <div class="drop-sub">or click to browse — JPEG, PNG, WebP · up to 20 files</div>
+  </div>
+
+  <div class="controls-card" id="controlsCard">
+    <div class="controls-row">
+      <div class="field">
+        <label>Output Format</label>
+        <select id="formatOut">
+          <option value="same">Same as input</option>
+          <option value="image/jpeg">JPEG</option>
+          <option value="image/png">PNG</option>
+          <option value="image/webp">WebP</option>
+        </select>
+      </div>
+      <div class="field">
+        <label>Quality (JPEG / WebP)</label>
+        <div class="slider-row">
+          <input type="range" id="qualitySlider" min="1" max="100" value="75" oninput="document.getElementById('qualityVal').textContent=this.value+'%'">
+          <span class="slider-val" id="qualityVal">75%</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="controls-row">
+      <div class="field">
+        <label>Resize</label>
+        <div class="resize-row">
+          <input type="number" id="resizeW" placeholder="Width" min="1" oninput="onWidthChange()">
+          <div class="resize-sep">×</div>
+          <input type="number" id="resizeH" placeholder="Height" min="1" oninput="onHeightChange()">
+        </div>
+        <label class="lock-row" style="margin-top:6px">
+          <input type="checkbox" id="lockAspect" checked> Lock aspect ratio
+        </label>
+      </div>
+      <div class="field" style="justify-content:flex-end">
+        <div class="btn-row">
+          <button class="btn-main" onclick="compressAll()">Compress →</button>
+          <button class="btn-secondary" onclick="resetAll()">Reset</button>
+          <div class="loading" id="loading"><div class="spinner"></div> Compressing...</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="results" id="results"></div>
+
+</main>
+<footer>
+  <a href="https://tools.jzadl.xyz">tools.jzadl.xyz</a>
+  <span>·</span>
+  <a href="https://jzadl.xyz">jzadl.xyz</a>
+  <span>·</span>
+  <a href="mailto:contact@jzadl.xyz">contact@jzadl.xyz</a>
+  <span>·</span>
+  <span>© 2026-present</span>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>

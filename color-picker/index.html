@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<!--color-picker — tools.jzadl.xyz, built by jzadl-->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Color Picker — jzadl tools</title>
+<meta name="description" content="Real-time color picker and converter. HEX, RGB, HSL, HSV, CMYK — instantly.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main>
+  <a href="https://tools.jzadl.xyz" class="back-link">← tools.jzadl.xyz</a>
+
+  <div class="hero">
+    <h1>Color<span>.</span>Picker</h1>
+    <p class="hero-bio">Pick a color and get it converted to HEX, RGB, HSL, HSV, and CMYK instantly. Click any format to copy.</p>
+  </div>
+
+  <div class="picker-layout">
+    <div class="preview-card">
+      <div class="preview-swatch" id="previewSwatch"></div>
+      <div class="preview-body">
+        <div class="preview-hex" id="previewHex">#3b82f6</div>
+        <div class="preview-name" id="previewName">Click the color wheel or use sliders</div>
+        <div class="color-input-wrap">
+          <input type="color" id="colorWheel" value="#3b82f6" oninput="onWheelChange(this.value)">
+          <span class="color-input-label">Open color picker</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="sliders-card">
+      <div class="slider-group">
+        <div class="slider-label-row"><span class="slider-label">R</span><span class="slider-val" id="val-r">59</span></div>
+        <input type="range" id="slider-r" min="0" max="255" value="59" oninput="onRGBSlider()">
+      </div>
+      <div class="slider-group">
+        <div class="slider-label-row"><span class="slider-label">G</span><span class="slider-val" id="val-g">130</span></div>
+        <input type="range" id="slider-g" min="0" max="255" value="130" oninput="onRGBSlider()">
+      </div>
+      <div class="slider-group">
+        <div class="slider-label-row"><span class="slider-label">B</span><span class="slider-val" id="val-b">246</span></div>
+        <input type="range" id="slider-b" min="0" max="255" value="246" oninput="onRGBSlider()">
+      </div>
+      <div style="border-top:1px solid #2e2e2e;margin:4px 0"></div>
+      <div class="slider-group">
+        <div class="slider-label-row"><span class="slider-label">H</span><span class="slider-val" id="val-h">217°</span></div>
+        <input type="range" id="slider-h" min="0" max="359" value="217" oninput="onHSLSlider()">
+      </div>
+      <div class="slider-group">
+        <div class="slider-label-row"><span class="slider-label">S</span><span class="slider-val" id="val-s">91%</span></div>
+        <input type="range" id="slider-s" min="0" max="100" value="91" oninput="onHSLSlider()">
+      </div>
+      <div class="slider-group">
+        <div class="slider-label-row"><span class="slider-label">L</span><span class="slider-val" id="val-l">60%</span></div>
+        <input type="range" id="slider-l" min="0" max="100" value="60" oninput="onHSLSlider()">
+      </div>
+    </div>
+  </div>
+
+  <div class="formats-grid" id="formatsGrid"></div>
+
+  <div class="section-head"><h2>Palette</h2><span>shades of current color</span></div>
+  <div class="palette-row" id="paletteRow"></div>
+
+  <div class="section-head"><h2>History</h2><span>click to restore</span></div>
+  <div class="history-row" id="historyRow"><span style="font-size:13px;color:#555;">No colors picked yet.</span></div>
+
+</main>
+<footer>
+  <a href="https://tools.jzadl.xyz">tools.jzadl.xyz</a>
+  <span>·</span>
+  <a href="https://jzadl.xyz">jzadl.xyz</a>
+  <span>·</span>
+  <a href="mailto:contact@jzadl.xyz">contact@jzadl.xyz</a>
+  <span>·</span>
+  <span>© 2026-present</span>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>

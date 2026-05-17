@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<!--image-compressor — tools.jzadl.xyz, built by jzadl-->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Image Compressor — jzadl tools</title>
+<meta name="description" content="Compress images instantly in your browser. No uploads, no server, nothing leaves your device.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { width: 100%; }
+body { font-family: 'Inter', sans-serif; background: #1a1a1a; color: #e0e0e0; min-height: 100vh; display: flex; flex-direction: column; }
+a { color: inherit; text-decoration: none; }
+main { flex: 1; width: 100%; padding: 80px 6vw; max-width: 960px; }
+
+.back-link { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; color: #555; margin-bottom: 32px; transition: color 0.15s; }
+.back-link:hover { color: #aaa; }
+
+.hero { margin-bottom: 48px; }
+.hero h1 { font-size: 48px; font-weight: 700; color: #fff; letter-spacing: -0.03em; line-height: 1.1; margin-bottom: 12px; }
+.hero h1 span { color: #3b82f6; }
+.hero-bio { font-size: 15px; color: #888; line-height: 1.65; max-width: 540px; }
+.privacy-note { display: inline-flex; align-items: center; gap: 6px; margin-top: 10px; font-size: 12px; color: #4ade80; }
+
+/* Drop zone */
+.drop-zone { border: 1.5px dashed #2e2e2e; border-radius: 12px; padding: 56px 32px; text-align: center; cursor: pointer; transition: border-color 0.2s, background 0.2s; margin-bottom: 24px; background: #1e1e1e; }
+.drop-zone:hover, .drop-zone.dragover { border-color: #3b82f6; background: #1c2333; }
+.drop-icon { font-size: 36px; margin-bottom: 14px; }
+.drop-title { font-size: 15px; font-weight: 600; color: #fff; margin-bottom: 6px; }
+.drop-sub { font-size: 13px; color: #555; }
+input[type=file] { display: none; }
+
+/* Controls */
+.controls-card { background: #222; border: 1px solid #2e2e2e; border-radius: 12px; padding: 22px 24px; margin-bottom: 24px; display: none; flex-direction: column; gap: 18px; }
+.controls-card.visible { display: flex; }
+.controls-row { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+
+.field { display: flex; flex-direction: column; gap: 6px; }
+.field label { font-size: 11px; color: #555; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; }
+.field select { background: #1a1a1a; border: 1px solid #2e2e2e; border-radius: 8px; color: #e0e0e0; font-family: inherit; font-size: 13px; padding: 9px 12px; outline: none; transition: border-color 0.15s; }
+.field select:focus { border-color: #3b82f6; }
+.field select option { background: #222; }
+
+.slider-row { display: flex; align-items: center; gap: 12px; }
+.slider-row input[type=range] { flex: 1; accent-color: #3b82f6; height: 4px; }
+.slider-val { font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #aaa; min-width: 36px; text-align: right; }
+
+.resize-row { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 8px; }
+.resize-sep { font-size: 12px; color: #555; text-align: center; }
+.field input[type=number] { background: #1a1a1a; border: 1px solid #2e2e2e; border-radius: 8px; color: #e0e0e0; font-family: 'JetBrains Mono', monospace; font-size: 13px; padding: 9px 12px; outline: none; transition: border-color 0.15s; width: 100%; }
+.field input[type=number]:focus { border-color: #3b82f6; }
+
+.lock-row { display: flex; align-items: center; gap: 8px; font-size: 12px; color: #555; cursor: pointer; user-select: none; }
+.lock-row input[type=checkbox] { accent-color: #3b82f6; }
+
+/* Btn */
+.btn-main { display: inline-flex; align-items: center; gap: 6px; padding: 9px 20px; background: #3b82f6; color: #fff; font-size: 13px; font-weight: 500; border-radius: 20px; transition: background 0.15s; cursor: pointer; border: none; font-family: inherit; }
+.btn-main:hover { background: #2563eb; }
+.btn-main:disabled { background: #2a2a2a; color: #444; cursor: not-allowed; }
+.btn-secondary { padding: 9px 20px; background: #222; border: 1px solid #2e2e2e; border-radius: 20px; font-size: 13px; font-weight: 500; color: #888; cursor: pointer; font-family: inherit; transition: border-color 0.15s, color 0.15s; }
+.btn-secondary:hover { border-color: #444; color: #fff; }
+.btn-dl { padding: 9px 20px; background: #1a2a1a; border: 1px solid #2a4a2a; border-radius: 20px; font-size: 13px; font-weight: 500; color: #4ade80; cursor: pointer; font-family: inherit; transition: border-color 0.15s, background 0.15s; }
+.btn-dl:hover { background: #1e3a1e; border-color: #3a6a3a; }
+.btn-row { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+
+/* Loading */
+.loading { display: none; align-items: center; gap: 10px; font-size: 13px; color: #555; }
+.loading.visible { display: flex; }
+.spinner { width: 16px; height: 16px; border: 2px solid #2e2e2e; border-top-color: #3b82f6; border-radius: 50%; animation: spin 0.7s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* Results */
+.results { display: none; margin-top: 32px; }
+.results.visible { display: block; }
+
+.section-head { display: flex; align-items: baseline; gap: 10px; margin-bottom: 16px; }
+.section-head h2 { font-size: 18px; font-weight: 600; color: #fff; }
+.section-head span { font-size: 12px; color: #555; }
+
+/* Compare */
+.compare-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 24px; }
+.compare-card { background: #222; border: 1px solid #2e2e2e; border-radius: 10px; overflow: hidden; }
+.compare-img { width: 100%; max-height: 300px; object-fit: contain; background: #111; display: block; }
+.compare-body { padding: 14px 16px; display: flex; flex-direction: column; gap: 4px; }
+.compare-label { font-size: 11px; color: #555; text-transform: uppercase; letter-spacing: 0.05em; font-weight: 600; }
+.compare-size { font-family: 'JetBrains Mono', monospace; font-size: 18px; font-weight: 600; color: #fff; }
+.compare-dims { font-size: 12px; color: #555; }
+
+/* Savings bar */
+.savings-card { background: #222; border: 1px solid #2e2e2e; border-radius: 10px; padding: 18px 20px; margin-bottom: 24px; }
+.savings-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 12px; }
+.savings-title { font-size: 13px; color: #555; }
+.savings-pct { font-size: 24px; font-weight: 700; color: #4ade80; }
+.savings-pct.bad { color: #f87171; }
+.savings-bar-bg { height: 8px; background: #2e2e2e; border-radius: 4px; overflow: hidden; }
+.savings-bar-fill { height: 100%; background: #4ade80; border-radius: 4px; transition: width 0.5s ease; }
+.savings-bar-fill.bad { background: #f87171; }
+.savings-sub { font-size: 12px; color: #555; margin-top: 8px; }
+
+/* Batch list */
+.batch-list { display: flex; flex-direction: column; gap: 8px; }
+.batch-item { background: #222; border: 1px solid #2e2e2e; border-radius: 8px; padding: 12px 16px; display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.batch-name { font-size: 13px; color: #fff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 260px; }
+.batch-stats { display: flex; gap: 12px; align-items: center; flex-shrink: 0; }
+.batch-size-orig { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #555; }
+.batch-size-new { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #4ade80; }
+.batch-pct { font-size: 11px; font-weight: 600; color: #4ade80; }
+.btn-dl-sm { padding: 4px 12px; background: transparent; border: 1px solid #2e2e2e; border-radius: 6px; font-size: 11px; color: #555; cursor: pointer; font-family: inherit; transition: border-color 0.15s, color 0.15s; white-space: nowrap; }
+.btn-dl-sm:hover { border-color: #3b82f6; color: #fff; }
+
+footer { border-top: 1px solid #2e2e2e; padding: 20px 6vw; font-size: 12px; color: #444; display: flex; gap: 12px; }
+footer a { color: #555; transition: color 0.15s; }
+footer a:hover { color: #888; }
+
+@media (max-width: 600px) {
+  .compare-grid { grid-template-columns: 1fr; }
+  .controls-row { grid-template-columns: 1fr; }
+  .hero h1 { font-size: 32px; }
+  .batch-name { max-width: 140px; }
+}
+</style>
+</head>
+<body>
+<main>
+  <a href="https://tools.jzadl.xyz" class="back-link">← tools.jzadl.xyz</a>
+
+  <div class="hero">
+    <h1>Image<span>.</span>Compressor</h1>
+    <p class="hero-bio">Compress and resize images instantly. Supports JPEG, PNG, and WebP. Batch compress up to 20 files at once.</p>
+    <div class="privacy-note">🔒 Nothing leaves your browser — 100% local processing</div>
+  </div>
+
+  <!-- Drop zone -->
+  <input type="file" id="fileInput" accept="image/jpeg,image/png,image/webp" multiple>
+  <div class="drop-zone" id="dropZone">
+    <div class="drop-icon">🖼️</div>
+    <div class="drop-title">Drop images here</div>
+    <div class="drop-sub">or click to browse — JPEG, PNG, WebP · up to 20 files</div>
+  </div>
+
+  <!-- Controls -->
+  <div class="controls-card" id="controlsCard">
+    <div class="controls-row">
+      <div class="field">
+        <label>Output Format</label>
+        <select id="formatOut">
+          <option value="same">Same as input</option>
+          <option value="image/jpeg">JPEG</option>
+          <option value="image/png">PNG</option>
+          <option value="image/webp">WebP</option>
+        </select>
+      </div>
+      <div class="field">
+        <label>Quality (JPEG / WebP)</label>
+        <div class="slider-row">
+          <input type="range" id="qualitySlider" min="1" max="100" value="75" oninput="document.getElementById('qualityVal').textContent=this.value+'%'">
+          <span class="slider-val" id="qualityVal">75%</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="controls-row">
+      <div class="field">
+        <label>Resize</label>
+        <div class="resize-row">
+          <input type="number" id="resizeW" placeholder="Width" min="1" oninput="onWidthChange()">
+          <div class="resize-sep">×</div>
+          <input type="number" id="resizeH" placeholder="Height" min="1" oninput="onHeightChange()">
+        </div>
+        <label class="lock-row" style="margin-top:6px">
+          <input type="checkbox" id="lockAspect" checked> Lock aspect ratio
+        </label>
+      </div>
+      <div class="field" style="justify-content:flex-end">
+        <div class="btn-row">
+          <button class="btn-main" onclick="compressAll()">Compress →</button>
+          <button class="btn-secondary" onclick="resetAll()">Reset</button>
+          <div class="loading" id="loading"><div class="spinner"></div> Compressing...</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Results -->
+  <div class="results" id="results"></div>
+
+</main>
+<footer>
+  <a href="https://tools.jzadl.xyz">tools.jzadl.xyz</a>
+  <span>·</span>
+  <a href="https://jzadl.xyz">jzadl.xyz</a>
+  <span>·</span>
+  <a href="mailto:contact@jzadl.xyz">contact@jzadl.xyz</a>
+  <span>·</span>
+  <span>© 2026-present</span>
+</footer>
+
+<script>
+let files = [];
+let originalAspects = [];
+
+// ── Drop zone ────────────────────────────────────────────────────────────────
+const dropZone = document.getElementById('dropZone');
+const fileInput = document.getElementById('fileInput');
+
+dropZone.addEventListener('click', () => fileInput.click());
+dropZone.addEventListener('dragover', e => { e.preventDefault(); dropZone.classList.add('dragover'); });
+dropZone.addEventListener('dragleave', () => dropZone.classList.remove('dragover'));
+dropZone.addEventListener('drop', e => {
+  e.preventDefault(); dropZone.classList.remove('dragover');
+  loadFiles([...e.dataTransfer.files]);
+});
+fileInput.addEventListener('change', () => loadFiles([...fileInput.files]));
+
+function loadFiles(newFiles) {
+  const valid = newFiles.filter(f => f.type.match(/image\/(jpeg|png|webp)/));
+  if (!valid.length) return;
+  files = valid.slice(0, 20);
+  originalAspects = [];
+
+  // Load dimensions for aspect ratio
+  let loaded = 0;
+  files.forEach((f, i) => {
+    const img = new Image();
+    const url = URL.createObjectURL(f);
+    img.onload = () => {
+      originalAspects[i] = img.width / img.height;
+      URL.revokeObjectURL(url);
+      loaded++;
+      if (loaded === files.length) {
+        // Pre-fill width/height from first image
+        document.getElementById('resizeW').value = img.width;
+        document.getElementById('resizeH').value = img.height;
+      }
+    };
+    img.src = url;
+  });
+
+  dropZone.querySelector('.drop-title').textContent = `${files.length} image${files.length > 1 ? 's' : ''} ready`;
+  dropZone.querySelector('.drop-sub').textContent = files.map(f => f.name).join(', ').substring(0, 80) + (files.length > 2 ? '...' : '');
+  document.getElementById('controlsCard').classList.add('visible');
+  document.getElementById('results').classList.remove('visible');
+  document.getElementById('results').innerHTML = '';
+}
+
+// ── Aspect ratio lock ────────────────────────────────────────────────────────
+function onWidthChange() {
+  if (!document.getElementById('lockAspect').checked || !originalAspects[0]) return;
+  const w = parseInt(document.getElementById('resizeW').value);
+  if (w) document.getElementById('resizeH').value = Math.round(w / originalAspects[0]);
+}
+function onHeightChange() {
+  if (!document.getElementById('lockAspect').checked || !originalAspects[0]) return;
+  const h = parseInt(document.getElementById('resizeH').value);
+  if (h) document.getElementById('resizeW').value = Math.round(h * originalAspects[0]);
+}
+
+// ── Compress ─────────────────────────────────────────────────────────────────
+function compressFile(file, targetW, targetH, quality, formatOut) {
+  return new Promise(resolve => {
+    const img = new Image();
+    const url = URL.createObjectURL(file);
+    img.onload = () => {
+      const canvas = document.createElement('canvas');
+      const w = targetW || img.width;
+      const h = targetH || img.height;
+      canvas.width = w;
+      canvas.height = h;
+      const ctx = canvas.getContext('2d');
+      ctx.drawImage(img, 0, 0, w, h);
+      URL.revokeObjectURL(url);
+
+      const mime = formatOut === 'same'
+        ? (file.type === 'image/png' ? 'image/png' : file.type === 'image/webp' ? 'image/webp' : 'image/jpeg')
+        : formatOut;
+
+      canvas.toBlob(blob => {
+        resolve({ blob, mime, w, h, origW: img.width, origH: img.height });
+      }, mime, quality / 100);
+    };
+    img.src = url;
+  });
+}
+
+async function compressAll() {
+  if (!files.length) return;
+
+  const quality = parseInt(document.getElementById('qualitySlider').value);
+  const formatOut = document.getElementById('formatOut').value;
+  const targetW = parseInt(document.getElementById('resizeW').value) || null;
+  const targetH = parseInt(document.getElementById('resizeH').value) || null;
+
+  document.getElementById('loading').classList.add('visible');
+  document.querySelector('.btn-main').disabled = true;
+
+  const results = [];
+  for (const file of files) {
+    const result = await compressFile(file, targetW, targetH, quality, formatOut);
+    results.push({ file, ...result });
+  }
+
+  document.getElementById('loading').classList.remove('visible');
+  document.querySelector('.btn-main').disabled = false;
+  renderResults(results);
+}
+
+function renderResults(results) {
+  const container = document.getElementById('results');
+  container.classList.add('visible');
+
+  const totalOrig = results.reduce((s, r) => s + r.file.size, 0);
+  const totalNew = results.reduce((s, r) => s + r.blob.size, 0);
+  const savedPct = Math.round((1 - totalNew / totalOrig) * 100);
+  const isBad = savedPct < 0;
+
+  if (results.length === 1) {
+    // Single file — show before/after preview
+    const r = results[0];
+    const origUrl = URL.createObjectURL(r.file);
+    const newUrl = URL.createObjectURL(r.blob);
+    const ext = r.mime.split('/')[1];
+    const newName = r.file.name.replace(/\.[^.]+$/, '') + '_compressed.' + ext;
+
+    container.innerHTML = `
+      <div class="section-head"><h2>Result</h2><span>before vs after</span></div>
+      <div class="compare-grid">
+        <div class="compare-card">
+          <img src="${origUrl}" class="compare-img" alt="Original">
+          <div class="compare-body">
+            <div class="compare-label">Original</div>
+            <div class="compare-size">${fmtSize(r.file.size)}</div>
+            <div class="compare-dims">${r.origW} × ${r.origH}px · ${r.file.type.split('/')[1].toUpperCase()}</div>
+          </div>
+        </div>
+        <div class="compare-card">
+          <img src="${newUrl}" class="compare-img" alt="Compressed">
+          <div class="compare-body">
+            <div class="compare-label">Compressed</div>
+            <div class="compare-size">${fmtSize(r.blob.size)}</div>
+            <div class="compare-dims">${r.w} × ${r.h}px · ${ext.toUpperCase()}</div>
+          </div>
+        </div>
+      </div>
+      ${savingsBar(savedPct, totalOrig, totalNew)}
+      <div class="btn-row" style="margin-top:16px">
+        <button class="btn-dl" onclick="downloadBlob(window._blobs[0], '${newName}')">Download ${newName}</button>
+      </div>
+    `;
+    window._blobs = [r.blob];
+  } else {
+    // Batch
+    window._blobs = results.map(r => r.blob);
+    const items = results.map((r, i) => {
+      const ext = r.mime.split('/')[1];
+      const newName = r.file.name.replace(/\.[^.]+$/, '') + '_compressed.' + ext;
+      const pct = Math.round((1 - r.blob.size / r.file.size) * 100);
+      return `<div class="batch-item">
+        <div class="batch-name" title="${r.file.name}">${r.file.name}</div>
+        <div class="batch-stats">
+          <span class="batch-size-orig">${fmtSize(r.file.size)}</span>
+          <span>→</span>
+          <span class="batch-size-new">${fmtSize(r.blob.size)}</span>
+          <span class="batch-pct" style="color:${pct<0?'#f87171':'#4ade80'}">${pct>0?'-'+pct+'%':'+'+Math.abs(pct)+'%'}</span>
+          <button class="btn-dl-sm" onclick="downloadBlob(window._blobs[${i}],'${newName}')">Download</button>
+        </div>
+      </div>`;
+    }).join('');
+
+    container.innerHTML = `
+      <div class="section-head"><h2>Results</h2><span>${results.length} files compressed</span></div>
+      ${savingsBar(savedPct, totalOrig, totalNew)}
+      <div class="batch-list" style="margin-top:16px">${items}</div>
+      <div class="btn-row" style="margin-top:16px">
+        <button class="btn-dl" onclick="downloadAll()">Download All</button>
+      </div>
+    `;
+  }
+}
+
+function savingsBar(pct, orig, newSize) {
+  const isBad = pct < 0;
+  const fillW = Math.min(100, Math.abs(pct));
+  const saved = Math.abs(orig - newSize);
+  return `<div class="savings-card">
+    <div class="savings-header">
+      <span class="savings-title">${isBad ? 'Size increased' : 'Space saved'}</span>
+      <span class="savings-pct ${isBad?'bad':''}">${isBad?'+':'-'}${Math.abs(pct)}%</span>
+    </div>
+    <div class="savings-bar-bg"><div class="savings-bar-fill ${isBad?'bad':''}" style="width:${fillW}%"></div></div>
+    <div class="savings-sub">${fmtSize(orig)} → ${fmtSize(newSize)} · ${isBad?'increased':'saved'} ${fmtSize(saved)}</div>
+  </div>`;
+}
+
+function downloadBlob(blob, name) {
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url; a.download = name; a.click();
+  setTimeout(() => URL.revokeObjectURL(url), 1000);
+}
+
+async function downloadAll() {
+  // Download one by one with a small delay
+  for (let i = 0; i < window._blobs.length; i++) {
+    const r_file = files[i];
+    const blob = window._blobs[i];
+    const ext = blob.type.split('/')[1];
+    const name = r_file.name.replace(/\.[^.]+$/, '') + '_compressed.' + ext;
+    downloadBlob(blob, name);
+    await new Promise(r => setTimeout(r, 300));
+  }
+}
+
+function fmtSize(bytes) {
+  if (bytes < 1024) return bytes + ' B';
+  if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(1) + ' KB';
+  return (bytes / (1024 * 1024)).toFixed(2) + ' MB';
+}
+
+function resetAll() {
+  files = []; originalAspects = [];
+  fileInput.value = '';
+  dropZone.querySelector('.drop-title').textContent = 'Drop images here';
+  dropZone.querySelector('.drop-sub').textContent = 'or click to browse — JPEG, PNG, WebP · up to 20 files';
+  document.getElementById('controlsCard').classList.remove('visible');
+  document.getElementById('results').classList.remove('visible');
+  document.getElementById('results').innerHTML = '';
+  document.getElementById('resizeW').value = '';
+  document.getElementById('resizeH').value = '';
+}
+</script>
+</body>
+</html>
