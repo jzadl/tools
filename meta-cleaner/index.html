@@ -13,7 +13,7 @@
 <body>
 <main>
 
-  <a href="https://tools.jzadl.xyz" class="back-link">&#8592; tools.jzadl.xyz</a>
+  <a href="https://tools.jzadl.xyz" class="back-link">↞ tools.jzadl.xyz</a>
 
   <div class="hero">
     <h1>Meta<span class="dot">.</span>Cleaner</h1>
@@ -24,7 +24,7 @@
   <div class="drop-zone" id="dropZone">
     <div class="drop-icon">🔍</div>
     <div class="drop-title" id="dropTitle">Drop your image here</div>
-    <div class="drop-sub" id="dropSub">or click to browse &mdash; JPEG, PNG, WebP, TIFF supported</div>
+    <div class="drop-sub" id="dropSub">or click to browse — JPEG, PNG, WebP, TIFF supported</div>
   </div>
 
   <div class="meta-section" id="metaSection">
@@ -39,8 +39,8 @@
     </div>
 
     <div class="mode-selector">
-      <button class="mode-btn active" id="modeStrip" onclick="setMode('strip')">&#10005; Strip all metadata</button>
-      <button class="mode-btn" id="modeReplace" onclick="setMode('replace')">&#9998; Replace with custom data</button>
+      <button class="mode-btn active" id="modeStrip" onclick="setMode('strip')">✕ Strip all metadata</button>
+      <button class="mode-btn" id="modeReplace" onclick="setMode('replace')">✎ Replace with custom data</button>
     </div>
 
     <div class="custom-fields panel" id="customFields">
@@ -61,7 +61,7 @@
           </div>
           <div class="field-group">
             <label class="field-label">Copyright</label>
-            <input class="field-input" id="fCopyright" placeholder="e.g. &copy; 2026 John Doe">
+            <input class="field-input" id="fCopyright" placeholder="e.g. © 2026 John Doe">
           </div>
           <div class="field-group">
             <label class="field-label">Date Taken</label>
@@ -88,14 +88,14 @@
     </div>
 
     <div class="actions">
-      <button class="btn btn-primary" id="processBtn">&#8595; Download cleaned image</button>
+      <button class="btn btn-primary" id="processBtn">↓ Download cleaned image</button>
       <button class="btn btn-secondary" id="newFileBtn">New image</button>
     </div>
 
   </div>
 
   <div class="note">
-    <strong>How it works:</strong> Uses <a href="https://github.com/exif-js/exif-js" target="_blank" rel="noopener">exif-js</a> to read metadata and the Canvas API to strip or replace it when re-encoding the image. JPEG files support full EXIF replacement. PNG and WebP are stripped via canvas re-encoding (no EXIF standard). Nothing is uploaded anywhere.
+    <strong>How it works:</strong> Uses <a href="https://github.com/exif-js/exif-js" target="_blank" rel="noopener">exif-js</a> to read metadata and the Canvas API to strip or replace it when re-encoding.
   </div>
 
 </main>
@@ -104,7 +104,7 @@
   <a href="https://tools.jzadl.xyz">tools.jzadl.xyz</a> ·
   <a href="https://jzadl.xyz">jzadl.xyz</a> ·
   <a href="mailto:contact@jzadl.xyz">E-Mail</a> ·
-  &copy; 2026-present
+  © 2026-present
 </footer>
 
 <script src="https://cdn.jsdelivr.net/npm/piexifjs@1.0.6/piexif.js"></script>
