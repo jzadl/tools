@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<!--cava-maker — tools.jzadl.xyz, built by jzadl-->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cava Maker — jzadl tools</title>
+<meta name="description" content="Build and preview cava config files visually. Tweak bars, colors, FPS, smoothing, and see the visualizer come to life.">
+<link rel="stylesheet" href="../shared.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main>
+  <a href="https://tools.jzadl.xyz" class="back-link">← tools.jzadl.xyz</a>
+
+  <div class="hero">
+    <h1>Cava<span>.</span>Maker</h1>
+    <p class="hero-bio">Design a cava config file with a live preview. Tweak the visualizer's bars, colors, FPS, smoothing, and more — then download your <code>config</code>.</p>
+  </div>
+
+  <div class="workspace">
+
+    <!-- Column 1: General + Color + Smoothing -->
+    <div class="controls">
+
+      <div class="card">
+        <div class="card-title">General</div>
+        <div class="field">
+          <label>Bars</label>
+          <div class="slider-row">
+            <input type="range" id="barsSlider" min="10" max="200" value="40">
+            <span class="slider-val" id="barsVal">40</span>
+          </div>
+        </div>
+        <div class="field">
+          <label>Framerate (FPS)</label>
+          <div class="slider-row">
+            <input type="range" id="fpsSlider" min="20" max="144" value="60">
+            <span class="slider-val" id="fpsVal">60</span>
+          </div>
+        </div>
+        <div class="field">
+          <label>Sensitivity</label>
+          <div class="slider-row">
+            <input type="range" id="sensSlider" min="1" max="200" value="100">
+            <span class="slider-val" id="sensVal">100</span>
+          </div>
+        </div>
+        <label class="check-btn">
+          <input type="checkbox" id="autosensCheck" checked hidden>
+          <span class="check-mark"></span>
+          Auto sensitivity
+        </label>
+      </div>
+
+      <div class="card">
+        <div class="card-title">Color</div>
+
+        <!-- Solid / Gradient tabs -->
+        <div class="tabs-row" style="margin-bottom:12px">
+          <button class="tab-btn active" id="solidTab" onclick="setColorMode('solid')">Solid</button>
+          <button class="tab-btn" id="gradientTab" onclick="setColorMode('gradient')">Gradient</button>
+        </div>
+
+        <!-- Solid mode -->
+        <div id="solidColorOpts">
+          <div class="color-swatch" id="fgSwatch"></div>
+          <div class="color-meta">
+            <span class="color-hex-lg" id="fgColorHex">#00FF00</span>
+            <input type="color" id="fgColor" value="#00ff00">
+          </div>
+          <div class="palette-row" id="fgPalette"></div>
+        </div>
+
+        <!-- Gradient mode -->
+        <div id="gradientOpts" style="display:none">
+          <div class="field">
+            <label>Gradient stops (click to edit)</label>
+            <div class="gradient-bar-wrap">
+              <div class="gradient-bar" id="gradientBar"></div>
+            </div>
+          </div>
+          <div class="gradient-stops" id="gradientStops"></div>
+          <button class="btn btn-ghost add-stop-btn" onclick="addGradientStop()">+ Add stop</button>
+          <div class="gradient-presets">
+            <span class="gradient-preset" data-colors='["#ff0000","#ffff00","#00ff00","#00ffff","#0000ff","#ff00ff","#ffffff"]' title="Rainbow"></span>
+            <span class="gradient-preset" data-colors='["#00ff00","#00ffff"]' title="Cyan/Green"></span>
+            <span class="gradient-preset" data-colors='["#ff4500","#ff8c00","#ffd700"]' title="Fire"></span>
+            <span class="gradient-preset" data-colors='["#8a2be2","#00bfff","#7fff00"]' title="Neon"></span>
+            <span class="gradient-preset" data-colors='["#ff69b4","#ff1493","#ff0000"]' title="Hot"></span>
+            <span class="gradient-preset" data-colors='["#00bfff","#1e90ff","#0000cd"]' title="Ocean"></span>
+          </div>
+        </div>
+
+        <!-- Background -->
+        <div class="bg-color-row">
+          <label>Background</label>
+          <div class="color-pick-row">
+            <input type="color" id="bgColor" value="#000000">
+            <span class="color-hex" id="bgColorHex">#000000</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">Smoothing</div>
+        <div class="field">
+          <label>Gravity (fall speed)</label>
+          <div class="slider-row">
+            <input type="range" id="gravitySlider" min="0" max="200" value="100">
+            <span class="slider-val" id="gravityVal">100</span>
+          </div>
+        </div>
+        <label class="check-btn">
+          <input type="checkbox" id="monstercatCheck" hidden>
+          <span class="check-mark"></span>
+          Monstercat smoothing
+        </label>
+        <label class="check-btn">
+          <input type="checkbox" id="wavesCheck" hidden>
+          <span class="check-mark"></span>
+          Wave mode
+        </label>
+      </div>
+
+    </div>
+
+    <!-- Column 2: preview + output + audio input -->
+    <div class="preview-col">
+
+      <div class="preview-card">
+        <div class="preview-area">
+          <canvas id="cavaCanvas"></canvas>
+          <div class="preview-fps" id="previewFps">60 FPS</div>
+        </div>
+        <div class="preview-controls">
+          <button class="btn btn-primary" id="pauseBtn" onclick="togglePause()">Pause</button>
+          <button class="btn btn-secondary" onclick="toggleFullscreen()">Fullscreen</button>
+        </div>
+      </div>
+
+      <div class="output-card">
+        <div class="card-title">cava config</div>
+        <div class="config-output" id="configOutput"></div>
+        <div class="btn-row" style="margin-top:10px">
+          <button class="btn btn-primary" id="copyCfgBtn" onclick="copyConfig()">Copy config</button>
+          <button class="btn btn-secondary" onclick="downloadConfig()">Download</button>
+        </div>
+      </div>
+
+      <!-- Audio Input -->
+      <div class="card">
+        <div class="card-title">Audio Input</div>
+        <div class="field">
+          <label>Method</label>
+          <select id="inputMethod">
+            <option value="pulse">pulse</option>
+            <option value="alsa">alsa</option>
+            <option value="fifo">fifo</option>
+            <option value="sndio">sndio</option>
+            <option value="portaudio">portaudio</option>
+            <option value="pipewire">pipewire</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>Source (leave blank for auto)</label>
+          <input type="text" id="inputSource" placeholder="auto" spellcheck="false">
+        </div>
+        <div class="field">
+          <label>Sample rate</label>
+          <div class="slider-row">
+            <input type="range" id="sampleRateSlider" min="8000" max="192000" value="44100" step="100">
+            <span class="slider-val" id="sampleRateVal">44100</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</main>
+
+<footer>
+  <a href="https://tools.jzadl.xyz">tools.jzadl.xyz</a>
+  <span>·</span>
+  <a href="https://jzadl.xyz">jzadl.xyz</a>
+  <span>·</span>
+  <a href="mailto:contact@jzadl.xyz">contact@jzadl.xyz</a>
+  <span>·</span>
+  <span>© 2026-present</span>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
