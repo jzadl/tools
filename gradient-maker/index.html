@@ -6,8 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Gradient Maker — jzadl tools</title>
 <meta name="description" content="Build linear and radial gradients visually. Add stops, drag them, move the radial center. Copy CSS instantly.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../shared.css">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -96,9 +95,9 @@
         <div class="css-label">CSS Output</div>
         <div class="css-code" id="cssCode"></div>
         <div class="btn-row-sm">
-          <button class="btn-copy" id="copyBtn" onclick="copyCSS()">Copy CSS</button>
-          <button class="btn-sm" onclick="copyBg()">Copy background</button>
-          <button class="btn-sm" onclick="randomGradient()">Random</button>
+          <button class="btn btn-primary" id="copyBtn" onclick="copyCSS()">Copy CSS</button>
+          <button class="btn btn-secondary" onclick="copyBg()">Copy background</button>
+          <button class="btn btn-secondary" onclick="randomGradient()">Random</button>
         </div>
       </div>
     </div>

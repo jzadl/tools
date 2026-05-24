@@ -88,7 +88,7 @@ async function compressAll() {
   const targetH = parseInt(document.getElementById('resizeH').value) || null;
 
   document.getElementById('loading').classList.add('visible');
-  document.querySelector('.btn-main').disabled = true;
+  document.getElementById('compressBtn').disabled = true;
 
   const results = [];
   for (const file of files) {
@@ -97,7 +97,7 @@ async function compressAll() {
   }
 
   document.getElementById('loading').classList.remove('visible');
-  document.querySelector('.btn-main').disabled = false;
+  document.getElementById('compressBtn').disabled = false;
   renderResults(results);
 }
 
@@ -139,7 +139,7 @@ function renderResults(results) {
       </div>
       ${savingsBar(savedPct, totalOrig, totalNew)}
       <div class="btn-row" style="margin-top:16px">
-        <button class="btn-dl" onclick="downloadBlob(window._blobs[0], '${newName}')">Download ${newName}</button>
+        <button class="btn btn-primary" onclick="downloadBlob(window._blobs[0], '${newName}')">Download ${newName}</button>
       </div>
     `;
     window._blobs = [r.blob];
@@ -166,7 +166,7 @@ function renderResults(results) {
       ${savingsBar(savedPct, totalOrig, totalNew)}
       <div class="batch-list" style="margin-top:16px">${items}</div>
       <div class="btn-row" style="margin-top:16px">
-        <button class="btn-dl" onclick="downloadAll()">Download All</button>
+        <button class="btn btn-primary" onclick="downloadAll()">Download All</button>
       </div>
     `;
   }

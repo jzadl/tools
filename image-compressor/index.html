@@ -6,8 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Image Compressor — jzadl tools</title>
 <meta name="description" content="Compress images instantly in your browser. No uploads, no server, nothing leaves your device.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../shared.css">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -59,10 +58,10 @@
           <input type="checkbox" id="lockAspect" checked> Lock aspect ratio
         </label>
       </div>
-      <div class="field" style="justify-content:flex-end">
+      <div class="field" style="justify-content:flex-end;min-width:0">
         <div class="btn-row">
-          <button class="btn-main" onclick="compressAll()">Compress →</button>
-          <button class="btn-secondary" onclick="resetAll()">Reset</button>
+          <button id="compressBtn" class="btn btn-primary" onclick="compressAll()">Compress →</button>
+          <button class="btn btn-secondary" onclick="resetAll()">Reset</button>
           <div class="loading" id="loading"><div class="spinner"></div> Compressing...</div>
         </div>
       </div>

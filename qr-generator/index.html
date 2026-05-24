@@ -6,9 +6,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>QR Generator — jzadl tools</title>
 <meta name="description" content="Generate QR codes for URLs, text, Wi-Fi, and contacts. Free, instant, no tracking.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<link rel="stylesheet" href="../shared.css">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -125,8 +124,8 @@
         <div class="qr-meta-value" id="qrContent"></div>
       </div>
       <div class="dl-row">
-        <button class="btn-dl" onclick="downloadQR('png')">Download PNG</button>
-        <button class="btn-dl" onclick="downloadQR('svg')">Download SVG</button>
+        <button class="btn btn-secondary" onclick="downloadQR('png')">Download PNG</button>
+        <button class="btn btn-secondary" onclick="downloadQR('svg')">Download SVG</button>
       </div>
     </div>
   </div>

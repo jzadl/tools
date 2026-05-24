@@ -416,7 +416,21 @@ function renderResults(hw) {
     })
     .join("");
 
-  document.getElementById("results").classList.add("visible");
+  // Force show all sections
+  const resultsDiv = document.getElementById("results");
+  resultsDiv.classList.add("visible");
+  resultsDiv.style.display = "block";
+  resultsDiv.style.opacity = "1";
+  resultsDiv.style.visibility = "visible";
+
+  // Ensure individual sections are visible
+  const sections = resultsDiv.querySelectorAll("section");
+  sections.forEach(section => {
+    section.style.display = "block";
+    section.style.opacity = "1";
+    section.style.visibility = "visible";
+    section.style.minHeight = "auto";
+  });
 }
 
 // ---------------------------------------------------------------------------

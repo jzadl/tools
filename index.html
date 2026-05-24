@@ -4,61 +4,48 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="tools.jzadl.xyz — a collection of utilities built by jzadl. Hackintosh helpers, converters, and more.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<meta name="google-site-verification" content="GSC_VERIFICATION_CODE" />
+<meta name="robots" content="index, follow">
 <title>tools.jzadl</title>
 <link rel="icon" type="image/x-icon" href="./favicon.ico">
+<link rel="stylesheet" href="shared.css">
 <style>
-* { box-sizing: border-box; margin: 0; padding: 0; }
-html, body { width: 100%; }
-body { font-family: 'Inter', sans-serif; background: #1a1a1a; color: #e0e0e0; min-height: 100vh; display: flex; flex-direction: column; }
-a { color: inherit; text-decoration: none; }
+/* index — homepage specific */
+main { max-width: none; padding: 80px 6vw; }
 
-main { flex: 1; width: 100%; padding: 80px 6vw; }
+.hero { margin-bottom: 56px; }
+.hero h1 { font-size: 3.5rem; }
+.hero-bio { font-size: 14px; max-width: 460px; }
 
-.back-link { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; color: #555; margin-bottom: 40px; transition: color 0.15s; }
-.back-link:hover { color: #aaa; }
-
-.hero { margin-bottom: 64px; }
-.hero h1 { font-size: 56px; font-weight: 700; color: #fff; letter-spacing: -0.03em; line-height: 1.1; margin-bottom: 16px; }
-.hero h1 span { color: #3b82f6; }
-.hero-bio { font-size: 16px; color: #888; line-height: 1.65; max-width: 480px; }
-
-.section-head { display: flex; align-items: baseline; gap: 10px; margin-bottom: 20px; }
-.section-head h2 { font-size: 18px; font-weight: 600; color: #fff; }
-.section-head span { font-size: 12px; color: #555; }
-
-.tools-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+.tools-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
 
 .tool-card {
-  background: #222;
-  border: 1px solid #2e2e2e;
-  border-radius: 10px;
-  padding: 22px 24px;
+  background: var(--surf);
+  border: 1px solid var(--brd);
+  border-radius: var(--radius-lg);
+  padding: 20px 22px;
   display: flex;
   flex-direction: column;
   gap: 8px;
   transition: border-color 0.15s, background 0.15s;
   cursor: pointer;
 }
-.tool-card:hover { border-color: #3b82f6; background: #242424; }
+.tool-card:hover { border-color: var(--blu); background: var(--surf2); }
 
 .tool-header { display: flex; align-items: center; justify-content: space-between; }
-.tool-icon { font-size: 20px; }
-.tool-arrow { font-size: 13px; color: #444; transition: color 0.15s; }
-.tool-card:hover .tool-arrow { color: #3b82f6; }
+.tool-icon  { font-size: 18px; }
+.tool-arrow { font-size: 12px; color: var(--brd3); transition: color 0.15s; }
+.tool-card:hover .tool-arrow { color: var(--blu-light); }
 
-.tool-name { font-size: 15px; font-weight: 600; color: #fff; margin-top: 10px; }
-.tool-desc { font-size: 13px; color: #777; line-height: 1.5; }
-
-.tool-tag { display: inline-flex; align-items: center; gap: 5px; margin-top: 4px; font-size: 11px; padding: 3px 8px; background: #2a2a2a; border: 1px solid #333; border-radius: 6px; color: #666; }
-
-footer { border-top: 1px solid #2e2e2e; padding: 20px 6vw; font-size: 12px; color: #444; display: flex; gap: 12px; }
-footer a { color: #555; transition: color 0.15s; }
-footer a:hover { color: #888; }
+.tool-name { font-family: var(--font-head); font-size: 14px; font-weight: 700; color: #fff; margin-top: 8px; }
+.tool-desc { font-size: 12px; color: var(--tx-muted); line-height: 1.5; }
 
 @media (max-width: 720px) { .tools-grid { grid-template-columns: 1fr 1fr; } }
-@media (max-width: 480px) { .tools-grid { grid-template-columns: 1fr; } .hero h1 { font-size: 38px; } }
+@media (max-width: 480px) { .tools-grid { grid-template-columns: 1fr; } .hero h1 { font-size: 2.2rem; } }
 </style>
 </head>
 <body>

@@ -6,152 +6,88 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Kext Checker — jzadl tools</title>
 <meta name="description" content="Upload your dxdiag.txt and get automatic kext and macOS version recommendations for your Hackintosh.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css"></head>
+<link rel="stylesheet" href="../shared.css">
+<link rel="stylesheet" href="style.css">
+</head>
 <body>
 
 <main>
 
-<a href="https://tools.jzadl.xyz" class="back-link">
-← tools.jzadl.xyz
-</a>
+  <a href="https://tools.jzadl.xyz" class="back-link">← tools.jzadl.xyz</a>
 
-<div class="hero">
-<h1>Kext<span>.</span>Checker</h1>
+  <div class="hero">
+    <h1>Kext<span>.</span>Checker</h1>
+    <p class="hero-bio">
+      Upload your <code>dxdiag.txt</code> and get automatic kext recommendations + best macOS version for your hardware.
+    </p>
+  </div>
 
-<p class="hero-bio">
-Upload your
-<code>dxdiag.txt</code>
-and get automatic kext recommendations + best macOS version for your hardware.
-</p>
-</div>
+  <div class="db-status">
+    <div class="db-dot" id="dbDot"></div>
+    <span id="dbStatusText">Loading database from cdn.jzadl.xyz...</span>
+  </div>
 
-<div class="db-status">
-<div class="db-dot" id="dbDot"></div>
+  <input type="file" id="fileInput" accept=".txt">
 
-<span id="dbStatusText">
-Loading database from cdn.jzadl.xyz...
-</span>
-</div>
+  <div class="drop-zone" id="dropZone">
+    <div class="drop-icon">📄</div>
+    <div class="drop-title" id="dropTitle">Drop your dxdiag.txt here</div>
+    <div class="drop-sub" id="dropSub">or click to browse — Windows only, run via Win+R → dxdiag → Save All Information</div>
+  </div>
 
-<input type="file" id="fileInput" accept=".txt">
+  <div class="btn-row" style="margin-bottom: 20px;">
+    <button class="btn btn-primary" id="analyzeBtn" disabled onclick="analyze()">Analyze →</button>
+    <button class="btn btn-secondary" id="clearBtn" style="display:none" onclick="clearAll()">Clear</button>
+  </div>
 
-<div class="drop-zone" id="dropZone">
+  <div class="loading" id="loading">
+    <div class="spinner"></div>
+    Parsing hardware info...
+  </div>
 
-<div class="drop-icon">📄</div>
+  <div class="error-box" id="errorBox"></div>
+  <div class="warn-box" id="warnBox"></div>
 
-<div class="drop-title" id="dropTitle">
-Drop your dxdiag.txt here
-</div>
+  <div class="results" id="results">
 
-<div class="drop-sub" id="dropSub">
-or click to browse — Windows only,
-run via Win+R → dxdiag → Save All Information
-</div>
+    <section>
+      <div class="section-head">
+        <h2>System Summary</h2>
+        <span>detected from dxdiag</span>
+      </div>
+      <div class="summary-grid" id="summaryGrid"></div>
+    </section>
 
-</div>
+    <section>
+      <div class="section-head">
+        <h2>macOS Compatibility</h2>
+        <span>based on your hardware</span>
+      </div>
+      <div class="macos-row" id="macosRow"></div>
+    </section>
 
-<div class="btn-row">
+    <section>
+      <div class="section-head">
+        <h2>Kext Recommendations</h2>
+        <span>sorted by category · for recommended macOS</span>
+      </div>
+      <div id="kextSections"></div>
+    </section>
 
-<button
-class="btn-main"
-id="analyzeBtn"
-disabled
-onclick="analyze()">
-
-Analyze →
-
-</button>
-
-<button
-class="btn-clear"
-id="clearBtn"
-style="display:none"
-onclick="clearAll()">
-
-Clear
-
-</button>
-
-</div>
-
-<div class="loading" id="loading">
-<div class="spinner"></div>
-Parsing hardware info...
-</div>
-
-<div class="error-box" id="errorBox"></div>
-<div class="warn-box" id="warnBox"></div>
-
-<div class="results" id="results">
-
-<section style="margin-bottom:48px">
-
-<div class="section-head">
-<h2>System Summary</h2>
-<span>detected from dxdiag</span>
-</div>
-
-<div class="summary-grid" id="summaryGrid"></div>
-
-</section>
-
-<section style="margin-bottom:48px">
-
-<div class="section-head">
-<h2>macOS Compatibility</h2>
-<span>based on your hardware</span>
-</div>
-
-<div class="macos-row" id="macosRow"></div>
-
-</section>
-
-<section>
-
-<div class="section-head">
-<h2>Kext Recommendations</h2>
-
-<span>
-sorted by category · for recommended macOS
-</span>
-
-</div>
-
-<div id="kextSections"></div>
-
-</section>
-
-</div>
+  </div>
 
 </main>
 
 <footer>
-
-<a href="https://tools.jzadl.xyz">
-tools.jzadl.xyz
-</a>
-
-<span>·</span>
-
-<a href="https://jzadl.xyz">
-jzadl.xyz
-</a>
-
-<span>·</span>
-
-<a href="mailto:contact@jzadl.xyz">
-contact@jzadl.xyz
-</a>
-
-<span>·</span>
-
-<span>© 2026-present</span>
-
+  <a href="https://tools.jzadl.xyz">tools.jzadl.xyz</a>
+  <span>·</span>
+  <a href="https://jzadl.xyz">jzadl.xyz</a>
+  <span>·</span>
+  <a href="mailto:contact@jzadl.xyz">contact@jzadl.xyz</a>
+  <span>·</span>
+  <span>© 2026-present</span>
 </footer>
 
 <script src="script.js"></script>
-
 </body>
 </html>
