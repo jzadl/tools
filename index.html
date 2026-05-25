@@ -165,5 +165,15 @@ main { max-width: none; padding: 80px 6vw; }
   <a href="mailto:contact@jzadl.xyz">E-Mail</a> ·
   &copy; 2026-present
 </footer>
+
+<script>
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('/sw.js');
+    });
+  }
+</script>
+
+  
 </body>
 </html>
