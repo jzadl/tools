@@ -59,9 +59,13 @@ self.addEventListener('activate', (event) => {
 });
 
 self.addEventListener('fetch', (event) => {
+  if (event.request.url.includes('huggingface.co') || 
+      event.request.url.includes('hf.co')) {
+    return;
+  }
   event.respondWith(
-    caches.match(event.request).then((cachedResponse) => {
-      return cachedResponse || fetch(event.request);
-    })
+    caches.match(event.request).then(r => r || fetch(event.request))
+  );
+});
   );
 });
