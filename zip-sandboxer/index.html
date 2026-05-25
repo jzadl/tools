@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Inspect ZIP file contents without extracting. Preview files, detect suspicious entries, and compute hashes safely in your browser." />
+  <title>ZIP Sandboxer — jzadl tools</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Syne:wght@400;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<main>
+  <a class="back-link" href="https://tools.jzadl.xyz">← tools.jzadl.xyz</a>
+
+  <div class="hero">
+    <h1>ZIP<span class="dot">.</span>Sandboxer</h1>
+    <p class="hero-bio">Inspect ZIP contents without extracting. Preview files, detect suspicious entries, compute SHA-256 hashes. Nothing leaves your browser.</p>
+    <span class="privacy-note">&#x1F512; 100% local — no uploads, no tracking</span>
+  </div>
+
+  <!-- Drop zone -->
+  <div class="drop-zone" id="dropZone">
+    <input type="file" id="fileInput" accept=".zip" />
+    <div class="drop-icon">🗜️</div>
+    <div class="drop-title">Drop a .zip file here</div>
+    <div class="drop-sub">or click to browse</div>
+  </div>
+
+  <!-- Warn box -->
+  <div class="warn-box" id="warnBox">
+    <strong>Suspicious content detected</strong>
+    <ul id="warnList"></ul>
+  </div>
+
+  <!-- Stats row -->
+  <div class="stats-row" id="statsRow" style="display:none;">
+    <div class="stat-card">
+      <span class="stat-label">File</span>
+      <span class="stat-value" id="statName" style="font-size:11px;word-break:break-all;">-</span>
+    </div>
+    <div class="stat-card">
+      <span class="stat-label">Size</span>
+      <span class="stat-value" id="statSize">-</span>
+    </div>
+    <div class="stat-card">
+      <span class="stat-label">Entries</span>
+      <span class="stat-value" id="statEntries">-</span>
+    </div>
+    <div class="stat-card">
+      <span class="stat-label">Suspicious</span>
+      <span class="stat-value" id="statSuspicious">-</span>
+    </div>
+    <div class="stat-card">
+      <span class="stat-label">Encrypted</span>
+      <span class="stat-value" id="statEncrypted">-</span>
+    </div>
+    <div style="margin-left:auto;">
+      <button class="btn btn-ghost" id="resetBtn">↺ Load another</button>
+    </div>
+  </div>
+
+  <!-- Mobile tabs (only visible on small screens) -->
+  <div class="mobile-tabs hidden" id="mobileTabs">
+    <button class="mobile-tab active" id="tabTree" onclick="switchTab('tree')">📁 Contents</button>
+    <button class="mobile-tab" id="tabPreview" onclick="switchTab('preview')">👁 Preview</button>
+  </div>
+
+  <!-- Main layout -->
+  <div class="sandbox-layout hidden" id="mainLayout">
+    <div class="panel tree-panel" id="treePanel">
+      <div class="panel-head">
+        <span class="panel-head-title">Contents</span>
+        <span class="panel-head-count" id="treeCount"></span>
+      </div>
+      <div class="panel-filter">
+        <input type="text" id="filterInput" placeholder="Filter files..." />
+      </div>
+      <div class="panel-body" id="fileTree">
+        <div class="loading" id="treeLoader"><span class="spinner"></span>Parsing archive...</div>
+      </div>
+    </div>
+
+    <div class="panel preview-panel" id="previewPanelWrapper">
+      <div class="panel-head">
+        <span class="panel-head-title">Preview</span>
+        <span class="panel-head-count" id="previewExt"></span>
+      </div>
+      <div class="panel-body" id="previewPanel">
+        <div class="preview-empty">
+          <span class="preview-empty-icon">👆</span>
+          Select a file to preview
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="note hidden" id="noteBox">
+    Uses <strong>JSZip</strong> — all processing is client-side. Your files never leave your device.
+  </div>
+</main>
+
+<footer>
+  <a href="https://tools.jzadl.xyz">tools.jzadl.xyz</a>
+  <a href="https://jzadl.xyz">jzadl.xyz</a>
+  <a href="mailto:contact@jzadl.xyz">contact@jzadl.xyz</a>
+  <span>© 2026-present</span>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
