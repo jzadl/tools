@@ -1,34 +1,6 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html, body { width: 100%; }
 
-:root {
-  --bg: #080808;
-  --surf: #0e0e0e;
-  --surf2: #111111;
-  --surf3: #161616;
-  --brd: #1e1e1e;
-  --brd2: #2a2a2a;
-  --brd3: #333333;
-  --blu: #2563eb;
-  --blu-dim: #1a3a6e;
-  --blu-light: #60a5fa;
-  --blu-glow: rgba(37, 99, 235, 0.55);
-  --blu-tint: rgba(37, 99, 235, 0.07);
-  --tx: #e0e0e0;
-  --tx-muted: #888888;
-  --tx-dim: #555555;
-  --tx-dimmer: #333333;
-  --green: #22c55e;
-  --red: #ef4444;
-  --amber: #f59e0b;
-  --font-sans: 'Space Mono', monospace;
-  --font-head: 'Syne', sans-serif;
-  --font-mono: 'Space Mono', monospace;
-  --radius-sm: 4px;
-  --radius: 6px;
-  --radius-lg: 8px;
-}
-
 /* ── Page load animation ── */
 @keyframes fadeUp {
   from { opacity: 0; transform: translateY(16px); }
