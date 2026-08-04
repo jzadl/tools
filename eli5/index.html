@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dev, pls explain It Like I'm Five · jzadl</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧸</text></svg>">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Playpen+Sans:wght@100..800&display=swap');
+
+:root{
+  --bg: #fdf6ec;
+  --bg-2: #fbeee6;
+  --ink: #4a3f4f;
+  --ink-soft: #7a6b7e;
+
+  --android: #c9e8c0;
+  --android-ink: #2f5b2a;
+  --ios: #cfe0f7;
+  --ios-ink: #2b4a75;
+  --windows: #d6ccf2;
+  --windows-ink: #453a7a;
+  --linux: #ffe3b3;
+  --linux-ink: #7a5613;
+
+  --card-bg: #ffffff;
+  --shadow: 6px 6px 0px rgba(74, 63, 79, 0.08);
+}
+
+*{box-sizing:border-box;}
+
+body{
+  margin:0;
+  font-family:'Playpen Sans', cursive;
+  background:
+    radial-gradient(circle at 10% 10%, var(--bg-2), transparent 40%),
+    radial-gradient(circle at 90% 20%, #e6f2ff, transparent 45%),
+    var(--bg);
+  color:var(--ink);
+  min-height:100vh;
+  padding-bottom:80px;
+}
+
+/* ---------- HERO ---------- */
+.hero{
+  text-align:center;
+  padding:64px 20px 40px;
+  position:relative;
+  overflow:hidden;
+}
+
+.hero .blob{
+  position:absolute;
+  border-radius:50%;
+  filter:blur(2px);
+  opacity:0.55;
+  z-index:0;
+}
+.blob-1{width:140px;height:140px;background:var(--android);top:10px;left:6%;animation:float 7s ease-in-out infinite;}
+.blob-2{width:100px;height:100px;background:var(--ios);top:60px;right:10%;animation:float 9s ease-in-out infinite reverse;}
+.blob-3{width:70px;height:70px;background:var(--linux);bottom:0px;left:20%;animation:float 6s ease-in-out infinite;}
+.blob-4{width:90px;height:90px;background:var(--windows);bottom:10px;right:20%;animation:float 8s ease-in-out infinite reverse;}
+
+@keyframes float{
+  0%,100%{transform:translateY(0) translateX(0);}
+  50%{transform:translateY(-14px) translateX(6px);}
+}
+
+.hero h1{
+  position:relative;
+  z-index:1;
+  font-size:clamp(2rem, 6vw, 3.4rem);
+  font-weight:800;
+  margin:0 0 10px;
+  line-height:1.1;
+}
+.hero h1 .five{
+  display:inline-block;
+  background:var(--card-bg);
+  border-radius:999px;
+  padding:2px 18px;
+  box-shadow:var(--shadow);
+  transform:rotate(-3deg);
+}
+
+.hero p{
+  position:relative;
+  z-index:1;
+  font-size:1.05rem;
+  color:var(--ink-soft);
+  max-width:520px;
+  margin:0 auto;
+}
+
+/* ---------- SEARCH ---------- */
+.search-wrap{
+  max-width:480px;
+  margin:32px auto 0;
+  padding:0 20px;
+  position:relative;
+  z-index:2;
+}
+#search{
+  width:100%;
+  font-family:inherit;
+  font-size:1.1rem;
+  padding:14px 20px;
+  border-radius:999px;
+  border:3px solid var(--ink);
+  background:var(--card-bg);
+  color:var(--ink);
+  outline:none;
+  box-shadow:var(--shadow);
+}
+#search::placeholder{color:var(--ink-soft);}
+#search:focus{transform:translateY(-2px);}
+
+.suggest-btn{
+  display:inline-block;
+  margin-top:16px;
+  font-family:inherit;
+  font-weight:700;
+  font-size:0.95rem;
+  text-decoration:none;
+  color:var(--ink);
+  padding:10px 22px;
+  border-radius:999px;
+  border:2.5px dashed var(--ink);
+  background:transparent;
+  transition:transform 0.15s ease, background 0.15s ease;
+}
+.suggest-btn:hover{
+  background:var(--card-bg);
+  transform:translateY(-2px) rotate(1deg);
+}
+
+/* ---------- NAV PILLS ---------- */
+.nav-pills{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  justify-content:center;
+  max-width:700px;
+  margin:24px auto 0;
+  padding:0 20px;
+}
+.pill{
+  font-family:inherit;
+  font-weight:700;
+  font-size:0.95rem;
+  padding:9px 18px;
+  border-radius:999px;
+  border:2.5px solid var(--ink);
+  background:var(--card-bg);
+  cursor:pointer;
+  transition:transform 0.15s ease;
+}
+.pill:hover{transform:translateY(-2px) rotate(-1deg);}
+.pill.active-android{background:var(--android);}
+.pill.active-ios{background:var(--ios);}
+.pill.active-windows{background:var(--windows);}
+.pill.active-linux{background:var(--linux);}
+
+/* ---------- SECTIONS ---------- */
+main{max-width:920px;margin:0 auto;padding:0 20px;}
+
+.section{margin-top:56px;}
+
+.section-head{
+  display:flex;
+  align-items:center;
+  gap:14px;
+  margin-bottom:20px;
+}
+.section-head .emoji{
+  font-size:2.2rem;
+  background:var(--card-bg);
+  border-radius:50%;
+  width:56px;height:56px;
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:var(--shadow);
+  flex-shrink:0;
+}
+.section-head h2{
+  font-size:1.8rem;
+  margin:0;
+  font-weight:800;
+}
+.section-head .count{
+  font-size:0.9rem;
+  color:var(--ink-soft);
+  font-weight:400;
+}
+
+.cards{
+  display:grid;
+  grid-template-columns:repeat(auto-fill, minmax(260px, 1fr));
+  gap:16px;
+}
+
+@keyframes cardIn{
+  from{opacity:0; transform:translateY(14px);}
+  to{opacity:1; transform:translateY(0);}
+}
+.card{animation:cardIn 0.45s ease backwards;}
+
+.card{
+  background:var(--card-bg);
+  border-radius:22px;
+  padding:18px 20px;
+  box-shadow:var(--shadow);
+  border:2.5px solid transparent;
+  cursor:pointer;
+  transition:transform 0.15s ease, border-color 0.15s ease;
+}
+.card:hover{transform:translateY(-4px) rotate(-0.5deg);}
+.card.open{transform:translateY(-2px);}
+
+.card .term{
+  font-weight:800;
+  font-size:1.15rem;
+  margin:0 0 8px;
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+.card .term::before{
+  content:"";
+  width:10px;height:10px;
+  border-radius:50%;
+  flex-shrink:0;
+  background:var(--dot-color);
+  transition:transform 0.3s ease;
+}
+.card.open .term::before{transform:scale(1.6);}
+
+.card .explanation-wrap{
+  margin:6px 0 0;
+  max-height:2.9em;
+  overflow:hidden;
+  transition:max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.card.open .explanation-wrap{max-height:var(--full-height, 600px);}
+
+.card .explanation{
+  font-size:0.98rem;
+  line-height:1.55;
+  color:var(--ink-soft);
+  margin:0;
+  opacity:0.85;
+  transition:opacity 0.4s ease;
+}
+.card.open .explanation{opacity:1;}
+
+.card .toggle-hint{
+  font-size:0.78rem;
+  font-weight:700;
+  color:var(--ink-soft);
+  opacity:0.7;
+  margin:8px 0 0;
+  display:inline-flex;
+  align-items:center;
+  gap:4px;
+}
+.card .toggle-hint .arrow{
+  display:inline-block;
+  transition:transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.card.open .toggle-hint .arrow{transform:rotate(180deg);}
+.card .toggle-hint .txt::before{content:"tap to read more";}
+.card.open .toggle-hint .txt::before{content:"show less";}
+
+.section[data-os="android"] .card:hover, .section[data-os="android"] .card.open{border-color:var(--android);}
+.section[data-os="ios"] .card:hover, .section[data-os="ios"] .card.open{border-color:var(--ios);}
+.section[data-os="windows"] .card:hover, .section[data-os="windows"] .card.open{border-color:var(--windows);}
+.section[data-os="linux"] .card:hover, .section[data-os="linux"] .card.open{border-color:var(--linux);}
+
+.hidden{display:none !important;}
+
+/* ---------- STATES ---------- */
+#loading, #error{
+  text-align:center;
+  padding:60px 20px;
+  color:var(--ink-soft);
+  font-size:1.1rem;
+}
+#error{display:none;}
+.retry-btn{
+  margin-top:14px;
+  font-family:inherit;
+  font-weight:700;
+  padding:10px 22px;
+  border-radius:999px;
+  border:2.5px solid var(--ink);
+  background:var(--card-bg);
+  cursor:pointer;
+}
+
+.no-results{
+  text-align:center;
+  padding:40px;
+  color:var(--ink-soft);
+  font-size:1.05rem;
+}
+
+.section-suggest{
+  display:block;
+  text-align:center;
+  margin-top:18px;
+  font-size:0.85rem;
+  font-weight:700;
+  color:var(--ink-soft);
+  text-decoration:none;
+  opacity:0.75;
+}
+.section-suggest:hover{opacity:1; text-decoration:underline;}
+
+footer{
+  text-align:center;
+  margin-top:70px;
+  color:var(--ink-soft);
+  font-size:0.85rem;
+}
+footer a{color:var(--ink); text-decoration:none; border-bottom:1.5px dashed var(--ink-soft);}
+
+@media (max-width: 480px){
+  .hero{padding:48px 16px 30px;}
+  .section-head .emoji{width:46px;height:46px;font-size:1.7rem;}
+  .section-head h2{font-size:1.4rem;}
+}
+
+@media (prefers-reduced-motion: reduce){
+  .card, .card *{
+    animation:none !important;
+    transition:none !important;
+  }
+}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="blob blob-1"></div>
+  <div class="blob blob-2"></div>
+  <div class="blob blob-3"></div>
+  <div class="blob blob-4"></div>
+  <h1>Explain It <span class="five">Like I'm Five</span></h1>
+  <p>Weird Android, iOS, Windows, and Linux terms, explained without the headache.</p>
+  <div class="search-wrap">
+    <input type="text" id="search" placeholder="Search a term... e.g. root, kernel, sudo">
+  </div>
+  <a class="suggest-btn" href="https://github.com/jzadl/cdn/issues/new?template=suggest-term.yml" target="_blank" rel="noopener">✏️ Suggest a term</a>
+</div>
+
+<div class="nav-pills" id="navPills"></div>
+
+<main id="content">
+  <div id="loading">loading terms from the cdn... 🧸</div>
+  <div id="error">
+    <p>Couldn't fetch the terms from the CDN 🥺</p>
+    <button class="retry-btn" onclick="loadTerms()">retry</button>
+  </div>
+</main>
+
+<footer>
+  made with love by jzadl · data served from <a href="https://github.com/jzadl/cdn" target="_blank" rel="noopener">jzadl/cdn</a>
+</footer>
+
+<script>
+const CDN_URL = "https://cdn.jsdelivr.net/gh/jzadl/cdn@latest/eli5-terms/terms.json";
+
+const SECTIONS = [
+  { key: "android", label: "Android", emoji: "🤖" },
+  { key: "ios",     label: "iOS",     emoji: "🍎" },
+  { key: "windows", label: "Windows", emoji: "🪟" },
+  { key: "linux",   label: "Linux",   emoji: "🐧" }
+];
+
+let TERMS_DATA = null;
+
+function randomPastel(){
+  const hue = Math.floor(Math.random() * 360);
+  const sat = 55 + Math.floor(Math.random() * 20);   // 55-75%
+  const light = 55 + Math.floor(Math.random() * 15); // 55-70%
+  return `hsl(${hue}, ${sat}%, ${light}%)`;
+}
+
+async function loadTerms(){
+  document.getElementById("loading").style.display = "block";
+  document.getElementById("error").style.display = "none";
+  try{
+    const res = await fetch(CDN_URL, { cache: "no-store" });
+    if(!res.ok) throw new Error("bad response");
+    TERMS_DATA = await res.json();
+    render();
+  }catch(e){
+    document.getElementById("loading").style.display = "none";
+    document.getElementById("error").style.display = "block";
+  }
+}
+
+function render(){
+  document.getElementById("loading").style.display = "none";
+
+  const nav = document.getElementById("navPills");
+  nav.innerHTML = SECTIONS.map(s =>
+    `<button class="pill" data-target="${s.key}">${s.emoji} ${s.label}</button>`
+  ).join("");
+  nav.querySelectorAll(".pill").forEach(btn=>{
+    btn.addEventListener("click", ()=>{
+      document.getElementById("sec-"+btn.dataset.target).scrollIntoView({behavior:"smooth", block:"start"});
+    });
+  });
+
+  const main = document.getElementById("content");
+  const sectionsHtml = SECTIONS.map(s=>{
+    const items = (TERMS_DATA[s.key] || []);
+    const cards = items.map((it, i)=>`
+      <div class="card" style="animation-delay:${Math.min(i * 0.04, 0.5)}s; --dot-color:${randomPastel()}" data-term="${it.term.toLowerCase()}" data-explanation="${it.explanation.toLowerCase()}">
+        <p class="term">${it.term}</p>
+        <div class="explanation-wrap"><p class="explanation">${it.explanation}</p></div>
+        <p class="toggle-hint"><span class="txt"></span><span class="arrow">▼</span></p>
+      </div>
+    `).join("");
+    return `
+      <section class="section" id="sec-${s.key}" data-os="${s.key}">
+        <div class="section-head">
+          <div class="emoji">${s.emoji}</div>
+          <div>
+            <h2>${s.label}</h2>
+            <div class="count">${items.length} terms</div>
+          </div>
+        </div>
+        <div class="cards">${cards}</div>
+        <div class="no-results hidden">nothing found here 🔍</div>
+        <a class="section-suggest" href="https://github.com/jzadl/cdn/issues/new?template=suggest-term.yml&title=${encodeURIComponent('[Term] ')}&os=${encodeURIComponent(s.label)}" target="_blank" rel="noopener">+ suggest a ${s.label} term</a>
+      </section>
+    `;
+  }).join("");
+
+  main.innerHTML = `<div id="loading" class="hidden"></div><div id="error" class="hidden"></div>` + sectionsHtml;
+
+  main.querySelectorAll(".card").forEach(card=>{
+    card.addEventListener("click", ()=>{
+      const wasOpen = card.classList.contains("open");
+      if(!wasOpen){
+        const p = card.querySelector(".explanation");
+        card.style.setProperty("--full-height", p.scrollHeight + "px");
+      }
+      card.classList.toggle("open");
+    });
+  });
+
+  document.getElementById("search").addEventListener("input", handleSearch);
+}
+
+function handleSearch(e){
+  const q = e.target.value.trim().toLowerCase();
+  document.querySelectorAll(".section").forEach(section=>{
+    let visibleCount = 0;
+    section.querySelectorAll(".card").forEach(card=>{
+      const match = !q || card.dataset.term.includes(q) || card.dataset.explanation.includes(q);
+      card.classList.toggle("hidden", !match);
+      if(match){
+        visibleCount++;
+        if(q){
+          const p = card.querySelector(".explanation");
+          card.style.setProperty("--full-height", p.scrollHeight + "px");
+          card.classList.add("open");
+        } else {
+          card.classList.remove("open");
+        }
+      }
+    });
+    section.querySelector(".no-results").classList.toggle("hidden", visibleCount !== 0);
+    section.classList.toggle("hidden", q && visibleCount === 0);
+  });
+}
+
+loadTerms();
+</script>
+
+</body>
+</html>
